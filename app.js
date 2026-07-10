@@ -40,13 +40,14 @@ Novo saldo: R$ ${saldo} `);
   } else if (opcao == 3) {
     let saqueFeito = Number(prompt("Quanto você deseja sacar?"));
 
-    if (saqueFeito <= saldo) {
+    if (saqueFeito <= saldo && saqueFeito > 0) {
       saldo = sacar(saldo, saqueFeito);
-
       alert(`Saque realizado!
 Novo saldo disponível: R$ ${saldo}`);
+    } else if (saqueFeito <= 0) {
+      alert("Valor de saque inválido.");
     } else {
-      alert("Saldo insuficiente para realizar o saque.");
+      alert("Saldo insuficiente");
     }
   } else if (opcao == 4) {
     alert("Obrigado por utilizar nosso banco!");
