@@ -1,4 +1,4 @@
-let saldo = 1000;
+let saldo = 10000;
 
 let opcao = 0;
 
@@ -26,14 +26,14 @@ Escolha uma opção:
   );
 
   if (opcao == 1) {
-    alert(`Seu saldo disponivel é de R$${consultarSaldo()}`);
+    alert(`Seu saldo disponivel é de R$${consultarSaldo().toFixed(2)}`);
   } else if (opcao == 2) {
     let depositoFeito = Number(prompt("Qual o valor deseja depositar?"));
 
     if (depositoFeito > 0) {
       saldo = depositar(saldo, depositoFeito);
       alert(`Depósito realizado!
-Novo saldo: R$ ${saldo} `);
+Novo saldo: R$ ${saldo.toFixed(2)} `);
     } else {
       alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
     }
@@ -43,7 +43,7 @@ Novo saldo: R$ ${saldo} `);
     if (saqueFeito <= saldo && saqueFeito > 0) {
       saldo = sacar(saldo, saqueFeito);
       alert(`Saque realizado!
-Novo saldo disponível: R$ ${saldo}`);
+Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
     } else if (saqueFeito <= 0) {
       alert("Valor de saque inválido.");
     } else {
