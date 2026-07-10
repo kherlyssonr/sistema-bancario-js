@@ -1,4 +1,4 @@
-let saldo = 10000;
+let saldo = 1000;
 let opcao = 0;
 
 // Exibe o saldo atual da conta
