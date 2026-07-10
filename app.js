@@ -43,5 +43,7 @@ Novo saldo disponível: R$ ${saldo}`);
     } else {
       alert("Saldo insuficiente para realizar o saque.");
     }
+  } else if (opcao == 4) {
+    alert("Obrigado por utilizar nosso banco!");
   }
 }
