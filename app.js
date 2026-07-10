@@ -29,9 +29,14 @@ Escolha uma opção:
     alert(`Seu saldo disponivel é de R$${consultarSaldo()}`);
   } else if (opcao == 2) {
     let depositoFeito = Number(prompt("Qual o valor deseja depositar?"));
-    saldo = depositar(saldo, depositoFeito);
-    alert(`Depósito realizado!
+
+    if (depositoFeito > 0) {
+      saldo = depositar(saldo, depositoFeito);
+      alert(`Depósito realizado!
 Novo saldo: R$ ${saldo} `);
+    } else {
+      alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
+    }
   } else if (opcao == 3) {
     let saqueFeito = Number(prompt("Quanto você deseja sacar?"));
 
