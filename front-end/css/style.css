@@ -1,0 +1,77 @@
+@import url(global.css);
+
+.cabecalho {
+    background-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    outline: 1px solid gray;
+    border-radius: 10px;
+    margin: 0.75rem 0.625rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.875rem 0.938rem;
+ 
+}
+
+.cabecalho_logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cabecalho_logo_textos {
+    line-height: 0.7;
+}
+
+.cabecalho_logo_texto {
+    color: #FFFFFF;
+}
+
+.cabecalho_logo_texto_destaque {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.cabecalho_navegacao {
+    display: flex;
+    gap: 1.875rem;
+}
+
+.cabecalho_navegacao a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 0.938rem;
+    font-weight: 600;
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cabecalho_navegacao a:hover {
+    color: #FFFFFF;
+    transform: translateY(-1px);
+}
+
+.cabecalho_button {
+    background-color: var(--primary-color);
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-radius: 0.313rem;
+    transition:  transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.cabecalho_button:hover {
+    transform: scale(1.04) translateY(-1px);
+}
+
+.cabecalho_button a {
+    text-decoration: none;
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: black;
+
+}
