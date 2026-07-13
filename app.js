@@ -1,5 +1,6 @@
 let saldo = 1000;
 let opcao = 0;
+let historico = [];
 
 // Exibe o saldo atual da conta
 function consultarSaldo() {
@@ -38,6 +39,7 @@ R$ ${consultarSaldo().toFixed(2)}`);
       saldo = depositar(saldo, depositoFeito);
       alert(`Depósito realizado!
 Novo saldo: R$ ${saldo.toFixed(2)} `);
+      historico.push(depositoFeito);
     } else {
       alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
     }
