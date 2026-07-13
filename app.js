@@ -39,7 +39,7 @@ R$ ${consultarSaldo().toFixed(2)}`);
       saldo = depositar(saldo, depositoFeito);
       alert(`Depósito realizado!
 Novo saldo: R$ ${saldo.toFixed(2)} `);
-      historico.push(depositoFeito);
+      historico.push(`Depósito: R$ ${depositoFeito.toFixed(2)}`);
     } else {
       alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
     }
