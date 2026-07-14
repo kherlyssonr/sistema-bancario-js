@@ -38,11 +38,12 @@ R$ ${consultarSaldo().toFixed(2)}`);
   // Depositar
   else if (opcao === 2) {
     let depositoFeito = Number(prompt("Qual o valor deseja depositar?"));
-
-    if (depositoFeito > 0) {
+    if (Number.isNaN(depositoFeito)) {
+      alert("Valor inválido. Digite apenas números.");
+    } else if (depositoFeito > 0) {
       saldo = depositar(saldo, depositoFeito);
       alert(`Depósito realizado!
-Novo saldo: R$ ${saldo.toFixed(2)} `);
+Novo saldo: R$ ${saldo.toFixed(2)}`);
       historico.push(`Depósito: R$ ${depositoFeito.toFixed(2)}`);
     } else {
       alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
@@ -51,16 +52,17 @@ Novo saldo: R$ ${saldo.toFixed(2)} `);
   // Sacar
   else if (opcao === 3) {
     let saqueFeito = Number(prompt("Quanto você deseja sacar?"));
-
-    if (saqueFeito <= saldo && saqueFeito > 0) {
+    if (Number.isNaN(saqueFeito)) {
+      alert("Valor inválido. Digite apenas números.");
+    } else if (saqueFeito <= saldo && saqueFeito > 0) {
       saldo = sacar(saldo, saqueFeito);
       alert(`Saque realizado!
 Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
       historico.push(`Saque: R$ ${saqueFeito.toFixed(2)}`);
     } else if (saqueFeito <= 0) {
-      alert("Valor de saque inválido.");
+      alert("Valor de saque inválido! Digite um valor maior que R$ 0,00.");
     } else {
-      alert("Saldo insuficiente");
+      alert("Saldo insuficiente.");
     }
   }
   // Ver extrato
