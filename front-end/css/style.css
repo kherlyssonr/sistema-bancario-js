@@ -1,6 +1,6 @@
 @import url(global.css);
 
-.cabecalho {
+.header {
     background-color: var(--secondary-color);
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
@@ -15,32 +15,32 @@
  
 }
 
-.cabecalho-logo {
+.header-logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.cabecalho-logo-textos {
+.header-logo-textos {
     line-height: 0.7;
 }
 
-.cabecalho-logo-texto {
+.header-logo-texto {
     color: #FFFFFF;
 }
 
-.cabecalho-logo-texto-destaque {
+.header-logo-texto-destaque {
     color: var(--primary-color);
     font-size: 1rem;
     font-weight: 400;
 }
 
-.cabecalho-navegacao {
+.header-navegacao {
     display: flex;
     gap: 1.875rem;
 }
 
-.cabecalho-navegacao a {
+.header-navegacao a {
     text-decoration: none;
     color: var(--color-text);
     font-size: 0.938rem;
@@ -48,12 +48,12 @@
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cabecalho-navegacao a:hover {
+.header-navegacao a:hover {
     color: #FFFFFF;
     transform: translateY(-1px);
 }
 
-.cabecalho-button {
+.header-button {
     background-color: var(--primary-color);
     cursor: pointer;
     padding: 0.75rem 1rem;
@@ -64,11 +64,11 @@
     background-color 0.2s ease;
 }
 
-.cabecalho-button:hover {
+.header-button:hover {
     transform: scale(1.04) translateY(-1px);
 }
 
-.cabecalho-button a {
+.header-button a {
     text-decoration: none;
     font-size: 0.938rem;
     font-weight: 600;
