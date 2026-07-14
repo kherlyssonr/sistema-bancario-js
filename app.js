@@ -106,10 +106,15 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
 
 ${extrato}
 =============================
-Total sacado: R$ ${totalSacado.toFixed(2)}
+
+📊 RESUMO DA CONTA
+
 Total depositado: R$ ${totalDepositado.toFixed(2)}
+Total sacado: R$ ${totalSacado.toFixed(2)}
 Quantidade de operações: ${historico.length}
-Saldo atual: R$ ${saldo.toFixed(2)}`);
+Saldo atual: R$ ${saldo.toFixed(2)}
+
+=============================`);
     } else {
       alert("Nenhuma operação foi realizada.");
     }
