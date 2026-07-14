@@ -34,8 +34,9 @@ Escolha uma opção:
   if (opcao === 1) {
     alert(`Seu saldo disponível é:
 R$ ${consultarSaldo().toFixed(2)}`);
-    // Depositar
-  } else if (opcao === 2) {
+  }
+  // Depositar
+  else if (opcao === 2) {
     let depositoFeito = Number(prompt("Qual o valor deseja depositar?"));
 
     if (depositoFeito > 0) {
@@ -46,8 +47,9 @@ Novo saldo: R$ ${saldo.toFixed(2)} `);
     } else {
       alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
     }
-    // Sacar
-  } else if (opcao === 3) {
+  }
+  // Sacar
+  else if (opcao === 3) {
     let saqueFeito = Number(prompt("Quanto você deseja sacar?"));
 
     if (saqueFeito <= saldo && saqueFeito > 0) {
@@ -60,18 +62,20 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
     } else {
       alert("Saldo insuficiente");
     }
-    // Ver extrato
-  } else if (opcao === 4) {
+  }
+  // Ver extrato
+  else if (opcao === 4) {
     if (historico.length > 0) {
       let extrato = "";
       for (let i = 0; i < historico.length; i++) {
         extrato = extrato + historico[i] + "\n";
       }
-      alert(`========== EXTRATO ========== 
-       ${extrato}
+      alert(`📄 EXTRATO BANCÁRIO
 
-       =============================
-        `);
+=============================
+
+${extrato}
+=============================`);
     } else {
       alert("Nenhuma operação foi realizada.");
     }
