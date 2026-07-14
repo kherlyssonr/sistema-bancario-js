@@ -107,6 +107,10 @@
     font-size: 3.813rem;
 }
 
+.hero-left-paragrafo {
+    color: #858992;
+}
+
 .hero-left-cards-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
