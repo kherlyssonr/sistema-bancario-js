@@ -69,7 +69,7 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
         `);
       }
     } else {
-      alert("Teste");
+      alert("Nenhuma operação foi realizada.");
     }
   } else if (opcao == 5) {
     alert("Obrigado por utilizar nosso banco!");
