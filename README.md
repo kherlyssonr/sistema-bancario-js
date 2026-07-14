@@ -1,97 +1,113 @@
-# 💰 Sistema Bancário em JavaScript
+# 🏦 Sistema Bancário em JavaScript
 
-![Versão](https://img.shields.io/badge/Versão-v2.0.0-blue)
-![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow)
+Projeto desenvolvido para praticar lógica de programação e fundamentos de JavaScript por meio da criação de um sistema bancário simples.
 
-# 💳 Sistema Bancário em JavaScript
-
-Projeto desenvolvido para colocar em prática os fundamentos de **lógica de programação com JavaScript**. A proposta é evoluir o sistema a cada novo conteúdo estudado, adicionando funcionalidades e melhorando a organização do código.
+O sistema funciona pelo navegador utilizando `prompt` e `alert`, permitindo consultar saldo, realizar depósitos e saques e visualizar o histórico das transações.
 
 ## 🚀 Versão atual
 
-**v2.0.0**
+**v2.0.1**
 
-Nesta versão, o sistema passou a registrar as movimentações realizadas e exibir um extrato bancário com o histórico de depósitos e saques.
+Esta versão traz correções e melhorias de usabilidade após o lançamento da v2.0.0.
 
 ## ✨ Funcionalidades
 
 - Consultar o saldo disponível;
 - Realizar depósitos;
 - Realizar saques;
-- Validar valores de depósito e saque;
-- Verificar se há saldo suficiente;
+- Impedir depósitos e saques com valores inválidos;
+- Verificar saldo insuficiente;
 - Registrar depósitos e saques no histórico;
-- Exibir o extrato bancário;
-- Informar quando nenhuma movimentação foi realizada;
-- Tratar opções inválidas no menu.
+- Visualizar o extrato bancário;
+- Informar quando nenhuma operação foi realizada;
+- Tratar opções inválidas no menu;
+- Exibir valores com duas casas decimais.
 
-## 🧠 Conceitos aplicados
+## 🛠️ Melhorias da v2.0.1
+
+- Correção no tratamento de valores inválidos;
+- Melhor diferenciação entre valor inválido e saldo insuficiente;
+- Padronização das mensagens exibidas ao usuário;
+- Melhorias nos comentários e na organização do código;
+- Pequenos ajustes de formatação e usabilidade.
+
+## 📚 Conceitos praticados
+
+Durante o desenvolvimento foram aplicados:
 
 - Variáveis;
-- Funções;
-- Parâmetros e retorno;
-- Condicionais (`if`, `else if` e `else`);
+- Condicionais com `if`, `else if` e `else`;
 - Laço de repetição `while`;
 - Laço de repetição `for`;
+- Funções;
+- Parâmetros e retorno;
 - Arrays;
-- Template strings;
-- Manipulação de valores numéricos;
-- Formatação monetária com `toFixed()`.
+- Método `push()`;
+- Propriedade `length`;
+- Conversão de valores com `Number()`;
+- Formatação numérica com `toFixed()`;
+- Manipulação de strings;
+- Validação de dados.
 
-## 📌 Evolução do projeto
+## ▶️ Como executar
+
+1. Clone este repositório:
+
+```bash
+git clone LINK-DO-SEU-REPOSITORIO
+```
+
+2. Abra a pasta do projeto.
+
+3. Abra o arquivo `index.html` no navegador.
+
+4. Utilize o menu exibido para realizar as operações.
+
+## 📌 Histórico de versões
+
+### v2.0.1
+
+- Correções de validação;
+- Melhorias nas mensagens;
+- Ajustes na organização e na experiência do usuário.
+
+### v2.0.0
+
+- Implementação do histórico de transações;
+- Registro de depósitos e saques;
+- Criação do extrato bancário;
+- Tratamento para extrato vazio.
+
+### v1.1.0
+
+- Validação de depósitos e saques;
+- Bloqueio de valores menores ou iguais a zero;
+- Verificação de saldo insuficiente.
 
 ### v1.0.0
 
 - Consulta de saldo;
-- Depósito;
-- Saque;
+- Depósitos;
+- Saques;
 - Menu interativo;
 - Organização das operações em funções.
 
-### v1.1.0
+## 🔜 Próximas melhorias
 
-- Validação de depósitos;
-- Validação de saques;
-- Bloqueio de valores menores ou iguais a zero;
-- Verificação de saldo insuficiente;
-- Melhorias nas mensagens do sistema.
-
-### v2.0.0
-
-- Histórico de transações;
-- Registro de depósitos e saques;
-- Nova opção para visualizar o extrato;
-- Tratamento para histórico vazio;
-- Exibição das movimentações em um único extrato.
-
-O sistema utiliza `prompt()` e `alert()` para interagir com o usuário.
-
-## 🛠️ Tecnologias
-
-- HTML;
-- JavaScript;
-- Git;
-- GitHub.
-
-## 🔜 Próximos passos
-
-- Corrigir pequenos erros e melhorar as mensagens na versão `v2.0.1`;
-- Tratar entradas que não sejam números;
-- Exibir total depositado e total sacado;
+- Mostrar o saldo atual no extrato;
+- Exibir o total depositado e sacado;
 - Mostrar a quantidade de operações realizadas;
-- Criar um resumo da conta;
-- Desenvolver uma interface visual;
-- Aplicar manipulação do DOM.
+- Adicionar data e hora às transações;
+- Criar uma interface visual com HTML, CSS e JavaScript;
+- Utilizar o DOM no lugar de `prompt` e `alert`.
 
-## 📚 Objetivo
+## 💻 Tecnologias utilizadas
 
-Este projeto faz parte da minha jornada de aprendizado em desenvolvimento Front-end. Ele continuará sendo atualizado conforme eu avançar nos estudos e aprender novos conceitos.
+- HTML
+- JavaScript
+- Git
+- GitHub
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Kherlysson Ryann**.
-
----
-
-⭐ Projeto em desenvolvimento.
+Desenvolvido por **Kherlysson Ryann**
