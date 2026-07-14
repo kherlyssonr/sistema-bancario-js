@@ -62,10 +62,14 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
     }
     // Ver extrato
   } else if (opcao == 4) {
-    for (let i = 0; i < historico.length; i++) {
-      alert(`========== EXTRATO ========== 
+    if (historico.length > 0) {
+      for (let i = 0; i < historico.length; i++) {
+        alert(`========== EXTRATO ========== 
         ${historico[i]}
         `);
+      }
+    } else {
+      alert("Teste");
     }
   } else if (opcao == 5) {
     alert("Obrigado por utilizar nosso banco!");
