@@ -87,12 +87,14 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
       for (let i = 0; i < historico.length; i++) {
         extrato = extrato + `${i + 1} - ${historico[i]}\n`;
       }
+
       alert(`📄 EXTRATO BANCÁRIO
 
 =============================
 
 ${extrato}
-=============================`);
+=============================
+Saldo atual: R$ ${saldo.toFixed(2)}`);
     } else {
       alert("Nenhuma operação foi realizada.");
     }
