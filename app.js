@@ -85,7 +85,7 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
     if (historico.length > 0) {
       let extrato = "";
       for (let i = 0; i < historico.length; i++) {
-        extrato = extrato + historico[i] + "\n";
+        extrato = extrato + `${i + 1} - ${historico[i]}\n`;
       }
       alert(`📄 EXTRATO BANCÁRIO
 
