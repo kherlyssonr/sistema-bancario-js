@@ -58,20 +58,28 @@ Novo saldo: R$ ${saldo.toFixed(2)}`);
   }
   // Realiza um saque
   else if (opcao === 3) {
-    let saqueFeito = Number(prompt("Quanto você deseja sacar?"));
-    if (Number.isNaN(saqueFeito)) {
-      alert("Valor inválido. Digite apenas números.");
-    } else if (saqueFeito > 0 && saqueFeito <= saldo) {
-      saldo = sacar(saldo, saqueFeito);
-      alert(`Saque realizado!
-Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
-      historico.push(`Saque: R$ ${saqueFeito.toFixed(2)}`);
-    } else if (saqueFeito <= 0) {
-      alert("Valor de saque inválido! Digite um valor maior que R$ 0,00.");
+    let saida = prompt("Quanto você deseja sacar?");
+    if (saida === null) {
+      alert("Operação de saque cancelada!");
+    } else if (saida === "") {
+      alert("Campo vazio!");
     } else {
-      alert("Saldo insuficiente para realizar o saque.");
+      let saqueFeito = Number(saida);
+      if (Number.isNaN(saqueFeito)) {
+        alert("Valor inválido. Digite apenas números.");
+      } else if (saqueFeito > 0 && saqueFeito <= saldo) {
+        saldo = sacar(saldo, saqueFeito);
+        alert(`Saque realizado!
+Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
+        historico.push(`Saque: R$ ${saqueFeito.toFixed(2)}`);
+      } else if (saqueFeito <= 0) {
+        alert("Valor de saque inválido! Digite um valor maior que R$ 0,00.");
+      } else {
+        alert("Saldo insuficiente para realizar o saque.");
+      }
     }
   }
+
   // Ver extrato
   else if (opcao === 4) {
     if (historico.length > 0) {
