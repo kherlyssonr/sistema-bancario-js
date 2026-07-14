@@ -1,6 +1,7 @@
 let saldo = 100;
 let opcao = 0;
 let historico = [];
+let historicoDepositos = [];
 
 // Exibe o saldo atual da conta
 function consultarSaldo() {
@@ -48,6 +49,7 @@ R$ ${consultarSaldo().toFixed(2)}`);
         alert("Valor inválido. Digite apenas números.");
       } else if (depositoFeito > 0) {
         saldo = depositar(saldo, depositoFeito);
+        historicoDepositos.push(depositoFeito);
         alert(`Depósito realizado!
 Novo saldo: R$ ${saldo.toFixed(2)}`);
         historico.push(`Depósito: R$ ${depositoFeito.toFixed(2)}`);
@@ -87,13 +89,17 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
       for (let i = 0; i < historico.length; i++) {
         extrato = extrato + `${i + 1} - ${historico[i]}\n`;
       }
-
+      let totalDepositado = 0;
+      for (let i = 0; i < historicoDepositos.length; i++) {
+        totalDepositado = totalDepositado + historicoDepositos[i];
+      }
       alert(`📄 EXTRATO BANCÁRIO
 
 =============================
 
 ${extrato}
 =============================
+Total depositado: R$ ${totalDepositado.toFixed(2)}
 Quantidade de operações: ${historico.length}
 Saldo atual: R$ ${saldo.toFixed(2)}`);
     } else {
