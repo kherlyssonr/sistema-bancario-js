@@ -62,7 +62,7 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
     } else if (saqueFeito <= 0) {
       alert("Valor de saque inválido! Digite um valor maior que R$ 0,00.");
     } else {
-      alert("Saldo insuficiente.");
+      alert("Saldo insuficiente para realizar o saque.");
     }
   }
   // Ver extrato
