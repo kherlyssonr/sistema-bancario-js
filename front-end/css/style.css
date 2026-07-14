@@ -121,6 +121,31 @@
     color: #FFFFFF;
 }
 
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.hero-buttons-bnt1 {
+    padding: 21px 23px 22px 23px;
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    gap: 20px;
+}
+
+.hero-buttons-bnt2 {
+    border: 1px solid var(--primary-color);
+    padding: 15px 22px 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    color:#8C9093;
+}
+
 .hero-right {
     outline: 2px solid white;
 }
