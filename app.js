@@ -54,7 +54,7 @@ Novo saldo: R$ ${saldo.toFixed(2)}`);
     let saqueFeito = Number(prompt("Quanto você deseja sacar?"));
     if (Number.isNaN(saqueFeito)) {
       alert("Valor inválido. Digite apenas números.");
-    } else if (saqueFeito <= saldo && saqueFeito > 0) {
+    } else if (saqueFeito > 0 && saqueFeito <= saldo) {
       saldo = sacar(saldo, saqueFeito);
       alert(`Saque realizado!
 Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
