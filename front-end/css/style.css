@@ -77,7 +77,10 @@
 }
 
 .container {
-    
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 
@@ -92,22 +95,42 @@
     flex: 1.2;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 5rem;
 }
 
 .hero-left {
     outline: 2px solid white;
     display: flex;
+    flex: 1.1;
     flex-direction: column;
     gap: 2.5rem;
 }
 
 .hero-badge {
+    width: fit-content;
     color: white;
     display: flex;
     align-items: center;
+    gap: .6rem;
+    padding: .6rem 1rem;
+    border:1px solid rgba(0,255,110,.3);
+    border-radius:999px;
+    background:rgba(0,255,110,.05);
+
 }
 
+.hero-badge span {
+    color:var(--primary-color);
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+.hot-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
 
 .hero-left-texto {
     color: white;
