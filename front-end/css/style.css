@@ -76,6 +76,10 @@
 
 }
 
+.container {
+    
+}
+
 
 .hero {
     min-height: calc(100vh - 120px);
@@ -97,6 +101,14 @@
     flex-direction: column;
     gap: 2.5rem;
 }
+
+.hero-badge {
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
 .hero-left-texto {
     color: white;
     font-size: 3.875rem;
@@ -121,6 +133,12 @@
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
+}
+
+.hero-left-card-icon {
+    border: 2px solid white;
+    padding: 0.938rem;
+    border-radius: 12px;
 }
 
 .hero-left-card-icon-text h2 {
@@ -182,5 +200,5 @@
 
 .hero-right img {
     width: 100%;
-    max-width: 51.25rem;
+    max-width: 43.75rem;
 }
