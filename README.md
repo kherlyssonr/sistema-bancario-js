@@ -1,101 +1,97 @@
 # 💰 Sistema Bancário em JavaScript
 
-![Versão](https://img.shields.io/badge/Versão-v1.1.0-blue)
+![Versão](https://img.shields.io/badge/Versão-v2.0.0-blue)
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow)
 
-## 📖 Sobre o projeto
+# 💳 Sistema Bancário em JavaScript
 
-Este projeto foi desenvolvido com o objetivo de praticar lógica de programação utilizando JavaScript.
+Projeto desenvolvido para colocar em prática os fundamentos de **lógica de programação com JavaScript**. A proposta é evoluir o sistema a cada novo conteúdo estudado, adicionando funcionalidades e melhorando a organização do código.
 
-A proposta é evoluir o sistema conforme novos conceitos forem sendo aprendidos durante os estudos. Cada versão adiciona novas funcionalidades e melhorias, simulando o desenvolvimento de um projeto real.
+## 🚀 Versão atual
 
----
+**v2.0.0**
 
-## 🚀 Funcionalidades
+Nesta versão, o sistema passou a registrar as movimentações realizadas e exibir um extrato bancário com o histórico de depósitos e saques.
 
-### 💰 Consulta de saldo
+## ✨ Funcionalidades
 
-- Exibe o saldo atual da conta.
+- Consultar o saldo disponível;
+- Realizar depósitos;
+- Realizar saques;
+- Validar valores de depósito e saque;
+- Verificar se há saldo suficiente;
+- Registrar depósitos e saques no histórico;
+- Exibir o extrato bancário;
+- Informar quando nenhuma movimentação foi realizada;
+- Tratar opções inválidas no menu.
 
-### ➕ Depósito
+## 🧠 Conceitos aplicados
 
-- Permite realizar depósitos.
-- Não permite depósitos menores ou iguais a zero.
+- Variáveis;
+- Funções;
+- Parâmetros e retorno;
+- Condicionais (`if`, `else if` e `else`);
+- Laço de repetição `while`;
+- Laço de repetição `for`;
+- Arrays;
+- Template strings;
+- Manipulação de valores numéricos;
+- Formatação monetária com `toFixed()`.
 
-### ➖ Saque
+## 📌 Evolução do projeto
 
-- Permite realizar saques.
-- Não permite valores menores ou iguais a zero.
-- Verifica se existe saldo suficiente antes de concluir a operação.
+### v1.0.0
 
-### 📋 Menu Interativo
+- Consulta de saldo;
+- Depósito;
+- Saque;
+- Menu interativo;
+- Organização das operações em funções.
 
-- Sistema executado através de um menu utilizando `while`.
-- Permanece em execução até o usuário escolher sair.
+### v1.1.0
 
-### ⚠️ Validação de entradas
+- Validação de depósitos;
+- Validação de saques;
+- Bloqueio de valores menores ou iguais a zero;
+- Verificação de saldo insuficiente;
+- Melhorias nas mensagens do sistema.
 
-- Trata opções inválidas do menu.
-- Exibe mensagens de erro para operações inválidas.
+### v2.0.0
 
-### 💵 Formatação de valores
+- Histórico de transações;
+- Registro de depósitos e saques;
+- Nova opção para visualizar o extrato;
+- Tratamento para histórico vazio;
+- Exibição das movimentações em um único extrato.
 
-- Todos os valores monetários são exibidos com duas casas decimais utilizando `toFixed(2)`.
-
----
+O sistema utiliza `prompt()` e `alert()` para interagir com o usuário.
 
 ## 🛠️ Tecnologias
 
-- JavaScript (ES6+)
+- HTML;
+- JavaScript;
+- Git;
+- GitHub.
 
----
+## 🔜 Próximos passos
 
-## 📌 Roadmap do Projeto
+- Corrigir pequenos erros e melhorar as mensagens na versão `v2.0.1`;
+- Tratar entradas que não sejam números;
+- Exibir total depositado e total sacado;
+- Mostrar a quantidade de operações realizadas;
+- Criar um resumo da conta;
+- Desenvolver uma interface visual;
+- Aplicar manipulação do DOM.
 
-### ✅ Versão 1.0.0
+## 📚 Objetivo
 
-- Consulta de saldo
-- Depósito
-- Saque
-- Menu principal
-- Estrutura utilizando funções
-
----
-
-### ✅ Versão 1.1.0
-
-- Validação de depósitos inválidos
-- Validação de saques inválidos
-- Tratamento de saldo insuficiente
-- Tratamento de opções inválidas
-- Formatação dos valores monetários
-- Melhorias nas mensagens do sistema
-
----
-
-### 🚧 Próxima versão — v2.0.0
-
-Planejamento:
-
-- Histórico de transações utilizando Arrays
-- Extrato bancário
-- Histórico de depósitos
-- Histórico de saques
-- Quantidade de operações
-- Total depositado
-- Total sacado
-
----
-
-## 🎯 Objetivo
-
-Este projeto faz parte da minha jornada de aprendizado em JavaScript.
-
-Meu objetivo é evoluí-lo continuamente conforme aprendo novos conceitos, tornando-o cada vez mais completo e próximo de um sistema bancário real.
-
----
+Este projeto faz parte da minha jornada de aprendizado em desenvolvimento Front-end. Ele continuará sendo atualizado conforme eu avançar nos estudos e aprender novos conceitos.
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Kherlysson Ryann** como projeto de estudos em JavaScript.
+Desenvolvido por **Kherlysson Ryann**.
+
+---
+
+⭐ Projeto em desenvolvimento.
