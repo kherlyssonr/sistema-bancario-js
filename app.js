@@ -63,11 +63,15 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
     // Ver extrato
   } else if (opcao == 4) {
     if (historico.length > 0) {
+      let extrato = "";
       for (let i = 0; i < historico.length; i++) {
-        alert(`========== EXTRATO ========== 
-        ${historico[i]}
-        `);
+        extrato = extrato + historico[i] + "\n";
       }
+      alert(`========== EXTRATO ========== 
+       ${extrato}
+
+       =============================
+        `);
     } else {
       alert("Nenhuma operação foi realizada.");
     }
