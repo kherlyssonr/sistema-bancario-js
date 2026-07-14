@@ -94,6 +94,7 @@ Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
 
 ${extrato}
 =============================
+Quantidade de operações: ${historico.length}
 Saldo atual: R$ ${saldo.toFixed(2)}`);
     } else {
       alert("Nenhuma operação foi realizada.");
