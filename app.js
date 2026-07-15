@@ -107,20 +107,27 @@ Novo saldo disponível: R$ ${cliente.conta.saldo.toFixed(2)}`);
 
   // Ver extrato
   else if (opcao === 4) {
-    if (historico.length > 0) {
+    if (transacoes.length > 0) {
       let extrato = "";
-      for (let i = 0; i < historico.length; i++) {
-        extrato = extrato + `${i + 1} - ${historico[i]}\n`;
+
+      for (let i = 0; i < transacoes.length; i++) {
+        extrato =
+          extrato +
+          `${i + 1} - ${transacoes[i].tipo}: R$ ${transacoes[i].valor.toFixed(2)}\n`;
       }
+
       let totalDepositado = 0;
+
       for (let i = 0; i < historicoDepositos.length; i++) {
         totalDepositado = totalDepositado + historicoDepositos[i];
       }
 
       let totalSacado = 0;
+
       for (let i = 0; i < historicoSaques.length; i++) {
         totalSacado = totalSacado + historicoSaques[i];
       }
+
       alert(`📄 EXTRATO BANCÁRIO
 
 =============================
@@ -132,16 +139,22 @@ ${extrato}
 
 Total depositado: R$ ${totalDepositado.toFixed(2)}
 Total sacado: R$ ${totalSacado.toFixed(2)}
-Quantidade de operações: ${historico.length}
+Quantidade de operações: ${transacoes.length}
 Saldo atual: R$ ${cliente.conta.saldo.toFixed(2)}
 
 =============================`);
     } else {
       alert("Nenhuma operação foi realizada.");
     }
-  } else if (opcao === 5) {
+  }
+
+  // Sair
+  else if (opcao === 5) {
     alert("Obrigado por utilizar nosso banco!");
-  } else {
+  }
+
+  // Opção inválida
+  else {
     alert(`❌ Opção inválida!
 
 Escolha uma opção entre 1 e 5.`);
