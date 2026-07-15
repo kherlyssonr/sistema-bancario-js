@@ -1,4 +1,4 @@
-let saldo = 100;
+let saldo = 200;
 
 let cliente = {
   nome: "Ryann",
@@ -18,7 +18,7 @@ let historicoSaques = [];
 
 // Exibe o saldo atual da conta
 function consultarSaldo() {
-  return saldo;
+  return cliente.conta.saldo;
 }
 
 // Soma o valor do depósito ao saldo atual
