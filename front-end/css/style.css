@@ -266,8 +266,21 @@
 }
 
 .hero-right img {
-    width: 100%;
+    max-width: 100%;
+    display: block;
+    height: auto;
     max-width: 43.75rem;
+    animation: flutuar 4s ease-in-out infinite alternate;
+    will-change: transform; 
+}
+
+@keyframes flutuar {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-12px);
+    }
 }
 
 .features {
