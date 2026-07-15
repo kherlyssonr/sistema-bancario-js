@@ -22,8 +22,8 @@ function consultarSaldo() {
 }
 
 // Soma o valor do depósito ao saldo atual
-function depositar(saldo, depositoFeito) {
-  return saldo + depositoFeito;
+function depositar(saldoAtual, depositoFeito) {
+  return saldoAtual + depositoFeito;
 }
 
 // Subtrai o valor do saque do saldo
@@ -61,10 +61,10 @@ R$ ${consultarSaldo().toFixed(2)}`);
       if (Number.isNaN(depositoFeito)) {
         alert("Valor inválido. Digite apenas números.");
       } else if (depositoFeito > 0) {
-        saldo = depositar(saldo, depositoFeito);
+        cliente.conta.saldo = depositar(cliente.conta.saldo, depositoFeito);
         historicoDepositos.push(depositoFeito);
         alert(`Depósito realizado!
-Novo saldo: R$ ${saldo.toFixed(2)}`);
+Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
         historico.push(`Depósito: R$ ${depositoFeito.toFixed(2)}`);
       } else {
         alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
