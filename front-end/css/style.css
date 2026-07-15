@@ -40,16 +40,33 @@
 }
 
 .header-navegacao a {
+    position: relative;
+    display: inline-block;
     text-decoration: none;
     color: var(--color-text);
     font-size: 0.938rem;
     font-weight: 600;
-    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 .header-navegacao a:hover {
     color: #FFFFFF;
     transform: translateY(-1px);
+}
+
+.header-navegacao a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+.header-navegacao a:hover::after {
+    width: 100%;
 }
 
 .header-button {
@@ -65,6 +82,7 @@
 
 .header-button:hover {
     transform: scale(1.04) translateY(-1px);
+    background-color: #158a00;
 }
 
 .header-button a {
@@ -134,11 +152,10 @@
 }
 
 .hero-left-texto {
-    color: white;
+    color: #FFFFFF;
     font-size: 4rem;
     font-weight: 800;
     line-height: 1.05;
-    color: #FFFFFF;
 }
 
 .hero-left-texto-destaque {
@@ -219,6 +236,19 @@
     gap: 0.813rem;
     border-radius: 0.563rem;
     cursor: pointer;
+    transition: background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.hero-buttons-bnt2:hover {
+    background-color: #00e676;
+    background-color: rgba(0, 230, 118, 0.1);
+    transform: translateY(-1s);
+}
+
+.hero-buttons-bnt2:active {
+    transform: translateY(0) scale(0.98);
 }
 
 .hero-buttons-bnt2 a {
