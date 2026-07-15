@@ -82,7 +82,7 @@
 
 .header-button:hover {
     transform: scale(1.04) translateY(-1px);
-    background-color: #158a00;
+    background-color: #37ff14bc;
 }
 
 .header-button a {
@@ -243,6 +243,12 @@
     gap: 0.813rem;
     border-radius: 0.563rem;
     cursor: pointer;
+    transition: transform 0.4s;
+}
+
+.hero-buttons-bnt1:hover{
+    transform: scale(1.1);
+    background-color: #37ff14bc;
 }
 
 .hero-buttons-bnt1 a {
