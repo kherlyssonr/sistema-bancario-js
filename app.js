@@ -27,8 +27,8 @@ function depositar(saldoAtual, depositoFeito) {
 }
 
 // Subtrai o valor do saque do saldo
-function sacar(saldo, saqueFeito) {
-  return saldo - saqueFeito;
+function sacar(saldoAtual, saqueFeito) {
+  return saldoAtual - saqueFeito;
 }
 
 // Mantém o sistema em execução até o usuário escolher a opção "Sair"
@@ -82,11 +82,11 @@ Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
       let saqueFeito = Number(saida);
       if (Number.isNaN(saqueFeito)) {
         alert("Valor inválido. Digite apenas números.");
-      } else if (saqueFeito > 0 && saqueFeito <= saldo) {
-        saldo = sacar(saldo, saqueFeito);
+      } else if (saqueFeito > 0 && saqueFeito <= cliente.conta.saldo) {
+        cliente.conta.saldo = sacar(cliente.conta.saldo, saqueFeito);
         historicoSaques.push(saqueFeito);
         alert(`Saque realizado!
-Novo saldo disponível: R$ ${saldo.toFixed(2)}`);
+Novo saldo disponível: R$ ${cliente.conta.saldo.toFixed(2)}`);
         historico.push(`Saque: R$ ${saqueFeito.toFixed(2)}`);
       } else if (saqueFeito <= 0) {
         alert("Valor de saque inválido! Digite um valor maior que R$ 0,00.");
