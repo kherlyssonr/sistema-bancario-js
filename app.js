@@ -63,7 +63,6 @@ R$ ${consultarSaldo().toFixed(2)}`);
           valor: depositoFeito,
         });
         proximoId++;
-        console.log(transacoes);
         alert(`Depósito realizado!
 Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
       } else {
