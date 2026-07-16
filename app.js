@@ -1,5 +1,3 @@
-let saldo = 200;
-
 let cliente = {
   nome: "Ryann",
   idade: 23,
@@ -13,7 +11,6 @@ let cliente = {
 
 let opcao = 0;
 let transacoes = [];
-let historico = [];
 let historicoDepositos = [];
 let historicoSaques = [];
 
@@ -70,7 +67,6 @@ R$ ${consultarSaldo().toFixed(2)}`);
         });
         alert(`Depósito realizado!
 Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
-        historico.push(`Depósito: R$ ${depositoFeito.toFixed(2)}`);
       } else {
         alert("Depósito inválido! Digite um valor maior que R$ 0,00.");
       }
@@ -96,7 +92,6 @@ Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
         });
         alert(`Saque realizado!
 Novo saldo disponível: R$ ${cliente.conta.saldo.toFixed(2)}`);
-        historico.push(`Saque: R$ ${saqueFeito.toFixed(2)}`);
       } else if (saqueFeito <= 0) {
         alert("Valor de saque inválido! Digite um valor maior que R$ 0,00.");
       } else {
