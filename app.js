@@ -113,8 +113,10 @@ Novo saldo disponível: R$ ${cliente.conta.saldo.toFixed(2)}`);
 
       let totalDepositado = 0;
 
-      for (let i = 0; i < historicoDepositos.length; i++) {
-        totalDepositado = totalDepositado + historicoDepositos[i];
+      for (let i = 0; i < transacoes.length; i++) {
+        if (transacoes[i].tipo === "deposito") {
+          totalDepositado = totalDepositado + transacoes[i].valor;
+        }
       }
 
       let totalSacado = 0;
