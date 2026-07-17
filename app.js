@@ -1,10 +1,14 @@
+let nomeCliente = prompt("Digite o nome do cliente:");
+let idadeCliente = Number(prompt("Digite a idade do cliente:"));
+let tipoConta = prompt("Digite o tipo da conta:");
+
 let cliente = {
-  nome: "Ryann",
-  idade: 23,
+  nome: nomeCliente,
+  idade: idadeCliente,
   conta: {
     agencia: "0001",
     numero: "12345-6",
-    tipo: "Conta corrente",
+    tipo: tipoConta,
     saldo: 100,
     transacoes: [],
   },
