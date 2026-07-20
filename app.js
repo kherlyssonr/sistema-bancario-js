@@ -16,6 +16,7 @@ let cliente = {
 
 let proximoId = 1;
 let opcao = 0;
+
 // Exibe o saldo atual da conta
 function consultarSaldo() {
   return cliente.conta.saldo;
@@ -26,13 +27,48 @@ function depositar(saldoAtual, depositoFeito) {
   return saldoAtual + depositoFeito;
 }
 
-// Subtrai o valor do saque do saldo
+// Subtrai o valor do saque do saldo atual
 function sacar(saldoAtual, saqueFeito) {
   return saldoAtual - saqueFeito;
 }
 
+// Formata uma transação para exibição
+function formatarTransacao(transacao) {
+  let horarioFormatado = transacao.momento.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  let dataFormatada = transacao.momento.toLocaleDateString("pt-BR");
+
+  let tipoFormatado = transacao.tipo === "deposito" ? "Depósito" : "Saque";
+
+  return `${transacao.id} - ${tipoFormatado}: R$ ${transacao.valor.toFixed(
+    2,
+  )} - ${dataFormatada} às ${horarioFormatado}`;
+}
+
+// Monta uma lista de transações para exibição
+function montarListaTransacoes(listaTransacoes) {
+  let listaFormatada = "";
+
+  for (let i = 0; i < listaTransacoes.length; i++) {
+    listaFormatada =
+      listaFormatada + formatarTransacao(listaTransacoes[i]) + "\n";
+  }
+
+  return listaFormatada;
+}
+
+// Soma os valores de uma lista de transações usando reduce()
+function calcularTotalTransacoes(listaTransacoes) {
+  return listaTransacoes.reduce(function (total, transacao) {
+    return total + transacao.valor;
+  }, 0);
+}
+
 // Mantém o sistema em execução até o usuário escolher a opção "Sair"
-while (opcao !== 6) {
+while (opcao !== 8) {
   opcao = Number(
     prompt(`
 Escolha uma opção:
@@ -40,37 +76,45 @@ Escolha uma opção:
 1 - Consultar saldo
 2 - Depositar
 3 - Sacar
-4 - Ver extrato
-5 - Ver dados da conta
-6 - Sair
+4 - Ver extrato completo
+5 - Filtrar transações
+6 - Buscar transação por ID
+7 - Ver dados da conta
+8 - Sair
 `),
   );
+
   // Consultar saldo disponível
   if (opcao === 1) {
     alert(`Seu saldo disponível é:
 R$ ${consultarSaldo().toFixed(2)}`);
   }
+
   // Realiza um depósito
   else if (opcao === 2) {
     let entrada = prompt("Qual o valor deseja depositar?");
+
     if (entrada === null) {
       alert("Operação de depósito cancelada!");
     } else if (entrada === "") {
       alert("Nenhum valor foi informado.");
     } else {
       let depositoFeito = Number(entrada);
+
       if (Number.isNaN(depositoFeito)) {
         alert("Valor inválido. Digite apenas números.");
       } else if (depositoFeito > 0) {
         cliente.conta.saldo = depositar(cliente.conta.saldo, depositoFeito);
-        let momentoDaTransacao = new Date();
+
         cliente.conta.transacoes.push({
           id: proximoId,
           tipo: "deposito",
           valor: depositoFeito,
-          momento: momentoDaTransacao,
+          momento: new Date(),
         });
+
         proximoId++;
+
         alert(`Depósito realizado!
 Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
       } else {
@@ -78,28 +122,32 @@ Novo saldo: R$ ${cliente.conta.saldo.toFixed(2)}`);
       }
     }
   }
+
   // Realiza um saque
   else if (opcao === 3) {
     let saida = prompt("Quanto você deseja sacar?");
+
     if (saida === null) {
       alert("Operação de saque cancelada!");
     } else if (saida === "") {
       alert("Nenhum valor foi informado.");
     } else {
       let saqueFeito = Number(saida);
+
       if (Number.isNaN(saqueFeito)) {
         alert("Valor inválido. Digite apenas números.");
       } else if (saqueFeito > 0 && saqueFeito <= cliente.conta.saldo) {
         cliente.conta.saldo = sacar(cliente.conta.saldo, saqueFeito);
-        let momentoDaTransacao = new Date();
+
         cliente.conta.transacoes.push({
           id: proximoId,
           tipo: "saque",
           valor: saqueFeito,
-          momento: momentoDaTransacao,
+          momento: new Date(),
         });
 
         proximoId++;
+
         alert(`Saque realizado!
 Novo saldo disponível: R$ ${cliente.conta.saldo.toFixed(2)}`);
       } else if (saqueFeito <= 0) {
@@ -110,52 +158,34 @@ Novo saldo disponível: R$ ${cliente.conta.saldo.toFixed(2)}`);
     }
   }
 
-  // Ver extrato
+  // Ver extrato completo
   else if (opcao === 4) {
     if (cliente.conta.transacoes.length > 0) {
-      let extrato = "";
+      let depositos = cliente.conta.transacoes.filter(function (transacao) {
+        return transacao.tipo === "deposito";
+      });
 
-      for (let i = 0; i < cliente.conta.transacoes.length; i++) {
-        let horarioFormatado = cliente.conta.transacoes[
-          i
-        ].momento.toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-        let dataFormatada =
-          cliente.conta.transacoes[i].momento.toLocaleDateString("pt-BR");
-        extrato =
-          extrato +
-          `${cliente.conta.transacoes[i].id} - ${cliente.conta.transacoes[i].tipo}: R$ ${cliente.conta.transacoes[i].valor.toFixed(2)} - ${dataFormatada} às ${horarioFormatado}\n`;
-      }
+      let saques = cliente.conta.transacoes.filter(function (transacao) {
+        return transacao.tipo === "saque";
+      });
 
-      let totalDepositado = 0;
+      let totalDepositado = calcularTotalTransacoes(depositos);
+      let totalSacado = calcularTotalTransacoes(saques);
 
-      for (let i = 0; i < cliente.conta.transacoes.length; i++) {
-        if (cliente.conta.transacoes[i].tipo === "deposito") {
-          totalDepositado = totalDepositado + cliente.conta.transacoes[i].valor;
-        }
-      }
-
-      let totalSacado = 0;
-
-      for (let i = 0; i < cliente.conta.transacoes.length; i++) {
-        if (cliente.conta.transacoes[i].tipo === "saque") {
-          totalSacado = totalSacado + cliente.conta.transacoes[i].valor;
-        }
-      }
+      let extrato = montarListaTransacoes(cliente.conta.transacoes);
 
       alert(`📄 EXTRATO BANCÁRIO
 
 =============================
 
-${extrato}
-=============================
+${extrato}=============================
 
 📊 RESUMO DA CONTA
 
 Total depositado: R$ ${totalDepositado.toFixed(2)}
 Total sacado: R$ ${totalSacado.toFixed(2)}
+Quantidade de depósitos: ${depositos.length}
+Quantidade de saques: ${saques.length}
 Quantidade de operações: ${cliente.conta.transacoes.length}
 Saldo atual: R$ ${cliente.conta.saldo.toFixed(2)}
 
@@ -163,8 +193,94 @@ Saldo atual: R$ ${cliente.conta.saldo.toFixed(2)}
     } else {
       alert("Nenhuma operação foi realizada.");
     }
-  } else if (opcao === 5) {
-    alert(` 👤 DADOS DO CLIENTE
+  }
+
+  // Filtrar transações com filter()
+  else if (opcao === 5) {
+    if (cliente.conta.transacoes.length === 0) {
+      alert("Nenhuma operação foi realizada.");
+    } else {
+      let opcaoFiltro = prompt(`
+Escolha um filtro:
+
+1 - Mostrar depósitos
+2 - Mostrar saques
+`);
+
+      if (opcaoFiltro === null) {
+        alert("Filtro cancelado.");
+      } else if (opcaoFiltro === "1" || opcaoFiltro === "2") {
+        let tipoEscolhido = opcaoFiltro === "1" ? "deposito" : "saque";
+
+        let transacoesFiltradas = cliente.conta.transacoes.filter(
+          function (transacao) {
+            return transacao.tipo === tipoEscolhido;
+          },
+        );
+
+        if (transacoesFiltradas.length === 0) {
+          let nomeOperacao =
+            tipoEscolhido === "deposito" ? "depósito" : "saque";
+
+          alert(`Nenhuma operação de ${nomeOperacao} foi realizada.`);
+        } else {
+          let titulo =
+            tipoEscolhido === "deposito" ? "📥 DEPÓSITOS" : "📤 SAQUES";
+
+          alert(`${titulo}
+
+=============================
+
+${montarListaTransacoes(transacoesFiltradas)}=============================`);
+        }
+      } else {
+        alert("Filtro inválido. Escolha 1 ou 2.");
+      }
+    }
+  }
+
+  // Buscar uma transação pelo ID com find()
+  else if (opcao === 6) {
+    if (cliente.conta.transacoes.length === 0) {
+      alert("Nenhuma operação foi realizada.");
+    } else {
+      let entradaId = prompt("Digite o ID da transação:");
+
+      if (entradaId === null) {
+        alert("Busca cancelada.");
+      } else if (entradaId === "") {
+        alert("Nenhum ID foi informado.");
+      } else {
+        let idProcurado = Number(entradaId);
+
+        if (Number.isNaN(idProcurado) || !Number.isInteger(idProcurado)) {
+          alert("ID inválido. Digite um número inteiro.");
+        } else {
+          let transacaoEncontrada = cliente.conta.transacoes.find(
+            function (transacao) {
+              return transacao.id === idProcurado;
+            },
+          );
+
+          if (transacaoEncontrada === undefined) {
+            alert("Nenhuma transação foi encontrada com esse ID.");
+          } else {
+            alert(`🔎 TRANSAÇÃO ENCONTRADA
+
+=============================
+
+${formatarTransacao(transacaoEncontrada)}
+
+=============================`);
+          }
+        }
+      }
+    }
+  }
+
+  // Ver dados do cliente e da conta
+  else if (opcao === 7) {
+    alert(`👤 DADOS DO CLIENTE
 =============================
 
 Nome: ${cliente.nome}
@@ -181,7 +297,7 @@ Tipo: ${cliente.conta.tipo}
   }
 
   // Sair
-  else if (opcao === 6) {
+  else if (opcao === 8) {
     alert("Obrigado por utilizar nosso banco!");
   }
 
@@ -189,6 +305,6 @@ Tipo: ${cliente.conta.tipo}
   else {
     alert(`❌ Opção inválida!
 
-Escolha uma opção entre 1 e 6.`);
+Escolha uma opção entre 1 e 8.`);
   }
 }
