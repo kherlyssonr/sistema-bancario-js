@@ -1,243 +1,1067 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* ==========================================================
+   VARIÁVEIS GLOBAIS
+========================================================== */
+
 :root {
-  /* Background */
+
+  /* Cores principais */
   --primary-color: #39ff14;
+  --primary-hover: #2ee80f;
+
   --secondary-color: #030712;
 
-  /* Texts */
-  --color-text: #5c646e;
+  /* Texto */
   --color-white: #ffffff;
+  --color-text: #8d98a7;
   --color-error: #ff4d4d;
 
-  /* Elements */
-  --color-card: rgba(255, 255, 255, 0.04);
-  --color-border: rgba(255, 255, 255, 0.12);
-  --color-input: rgba(255, 255, 255, 0.06);
+  /* Card */
+  --color-card: rgba(12, 18, 28, 0.72);
+  --color-border: rgba(255,255,255,.08);
 
-  /* Fonts */
+  /* Inputs */
+  --color-input: rgba(255,255,255,.05);
+
+  /* Sombras */
+  --shadow-card:
+      0 30px 70px rgba(0,0,0,.55),
+      0 0 60px rgba(57,255,20,.05);
+
+  --shadow-button:
+      0 10px 30px rgba(57,255,20,.20);
+
+  /* Bordas */
+  --radius-lg: 22px;
+  --radius-md: 14px;
+
+  /* Fontes */
   --primary-font: "Inter", sans-serif;
+
+  /* Transições */
+  --transition:
+      .30s cubic-bezier(.4,0,.2,1);
+
 }
 
-/* Remove estilos padrões do navegador */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ==========================================================
+   RESET
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* Configurações gerais da página */
-body {
-  min-height: 100vh;
-  background-color: var(--secondary-color);
-  color: var(--color-white);
-  font-family: var(--primary-font);
+img{
+
+    display:block;
+
+    max-width:100%;
+
 }
 
-/* Centraliza o conteúdo */
-main {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+html{
+
+    scroll-behavior:smooth;
+
 }
 
-/* Cartão principal do login */
+body{
+
+    min-height:100vh;
+
+    font-family:var(--primary-font);
+
+    color:var(--color-white);
+
+    background:
+
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(57,255,20,.18),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(37,99,235,.18),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.02),
+            transparent 70%
+        ),
+
+        var(--secondary-color);
+
+    overflow-x:hidden;
+
+    -webkit-font-smoothing:antialiased;
+
+    text-rendering:optimizeLegibility;
+
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+main{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:32px;
+
+}
+
+/* ==========================================================
+   ANIMAÇÕES
+========================================================== */
+
+@keyframes surgir{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(40px)
+            scale(.97);
+
+        filter:blur(6px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
+
+    }
+
+}
+
+/* ==========================================================
+   CARD DE LOGIN
+========================================================== */
+
 .login-container {
-  width: 100%;
-  max-width: 460px;
-  padding: 40px;
-  background-color: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+    max-width:460px;
+
+    padding:44px;
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-card);
+
+    border:1px solid var(--color-border);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:var(--shadow-card);
+
+    animation:surgir .8s ease;
+
+    isolation:isolate;
+
+    will-change:
+    transform,
+    opacity;
+
 }
 
-/* Cabeçalho */
-.login-cabecalho {
-  margin-bottom: 32px;
-  text-align: center;
+/* ==========================================================
+   GLOW VERDE
+========================================================== */
+
+.login-container::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-140px;
+    left:-140px;
+
+    width:300px;
+    height:300px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(57,255,20,.16),
+            transparent 72%
+        );
+
+    pointer-events:none;
+
+    z-index:-1;
+
 }
 
-/* Nome do banco */
-.login-cabecalho h1 {
-  margin-bottom: 28px;
-  color: var(--primary-color);
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -1px;
+/* ==========================================================
+   BRILHO INTERNO
+========================================================== */
+
+.login-container::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            140deg,
+
+            rgba(255,255,255,.08),
+
+            transparent 22%,
+
+            transparent 72%,
+
+            rgba(255,255,255,.03)
+
+        );
+
+    pointer-events:none;
+
+    border-radius:inherit;
+
 }
 
-/* Título do login */
-.login-cabecalho h2 {
-  margin-bottom: 10px;
-  color: var(--color-white);
-  font-size: 26px;
-  font-weight: 600;
+/* ==========================================================
+   CABEÇALHO
+========================================================== */
+
+.login-cabecalho{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    margin-bottom:40px;
+
 }
 
-/* Texto de apresentação */
-.login-cabecalho p {
-  color: var(--color-text);
-  font-size: 15px;
-  line-height: 1.5;
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.logo-cabecalho{
+
+    width:72px;
+
+    margin-bottom:18px;
+
+    user-select:none;
+
+    filter:
+
+        drop-shadow(
+            0 0 15px rgba(57,255,20,.35)
+        );
+
 }
 
-/* Formulário */
-#form-login {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.login-cabecalho h2{
+
+    margin-bottom:12px;
+
+    font-size:1.9rem;
+
+    font-weight:700;
+
+    letter-spacing:-1px;
+
+    color:var(--color-white);
+
 }
 
-/* Área de cada campo */
-.campo-formulario {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ==========================================================
+   SUBTÍTULO
+========================================================== */
+
+.login-cabecalho p{
+
+    max-width:320px;
+
+    color:var(--color-text);
+
+    font-size:.95rem;
+
+    line-height:1.7;
+
 }
 
-/* Texto acima dos campos */
-.campo-formulario label {
-  color: var(--color-white);
-  font-size: 14px;
-  font-weight: 500;
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.divider-container{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:16px;
+
+    margin:32px 0;
+
 }
 
-/* Campos de e-mail e senha */
-.campo-formulario input {
-  width: 100%;
-  padding: 14px 16px;
-  background-color: var(--color-input);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  color: var(--color-white);
-  font-family: var(--primary-font);
-  font-size: 15px;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s,
-    background-color 0.2s;
+/* ==========================================================
+   LINHAS
+========================================================== */
+
+.divider-line{
+
+    flex:1;
+
+    height:1px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(57,255,20,.85),
+
+            transparent
+
+        );
+
 }
 
-/* Placeholder dos campos */
-.campo-formulario input::placeholder {
-  color: var(--color-text);
+/* ==========================================================
+   ÍCONE CENTRAL
+========================================================== */
+
+.divider-icon{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
 }
 
-/* Campo selecionado */
-.campo-formulario input:focus {
-  outline: none;
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.15);
+.divider-icon img{
+
+    width:22px;
+
+    opacity:.9;
+
 }
 
-/* Área de mostrar senha */
-.mostrar-senha {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ==========================================================
+   FORMULÁRIO
+========================================================== */
+
+#form-login{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
 }
 
-/* Checkbox */
-.mostrar-senha input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--primary-color);
-  cursor: pointer;
+/* ==========================================================
+   CAMPO
+========================================================== */
+
+.campo-formulario{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
 }
 
-/* Texto do checkbox */
-.mostrar-senha label {
-  color: var(--color-text);
-  font-size: 14px;
-  cursor: pointer;
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.campo-formulario label{
+
+    color:var(--color-white);
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+    letter-spacing:.3px;
+
 }
 
-/* Mensagem de erro */
-#mensagem-login {
-  min-height: 20px;
-  color: var(--color-error);
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
+/* ==========================================================
+   WRAPPER DO INPUT
+   (já preparado para receber ícones futuramente)
+========================================================== */
+
+.input-wrapper{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
 }
 
-/* Botão principal */
-#botao-entrar {
-  width: 100%;
-  padding: 14px;
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 10px;
-  color: var(--secondary-color);
-  font-family: var(--primary-font);
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition:
-    background-color 0.2s,
-    box-shadow 0.2s,
-    transform 0.1s;
+/* ==========================================================
+   INPUT
+========================================================== */
+
+.campo-formulario input{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border:none;
+
+    border-radius:var(--radius-md);
+
+    background:var(--color-input);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:var(--color-white);
+
+    font-family:var(--primary-font);
+
+    font-size:.95rem;
+
+    transition:
+
+        border-color .3s,
+
+        background-color .3s,
+
+        box-shadow .3s,
+
+        transform .2s;
+
 }
 
-/* Efeito ao passar o mouse */
-#botao-entrar:hover {
-  background-color: #2ee80f;
-  box-shadow: 0 8px 24px rgba(57, 255, 20, 0.2);
+/* ==========================================================
+   PLACEHOLDER
+========================================================== */
+
+.campo-formulario input::placeholder{
+
+    color:#6d7683;
+
 }
 
-/* Efeito ao pressionar */
-#botao-entrar:active {
-  transform: scale(0.98);
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.campo-formulario input:hover{
+
+    border-color:
+
+        rgba(57,255,20,.40);
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    transform:
+
+        translateY(-1px);
+
 }
 
-/* Navegação pelo teclado */
-#botao-entrar:focus {
-  outline: 3px solid rgba(57, 255, 20, 0.25);
-  outline-offset: 3px;
+/* ==========================================================
+   FOCUS
+========================================================== */
+
+.campo-formulario input:focus{
+
+    outline:none;
+
+    border-color:
+
+        var(--primary-color);
+
+    background:
+
+        rgba(255,255,255,.09);
+
+    box-shadow:
+
+        0 0 0 4px rgba(57,255,20,.14);
+
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
-  main {
-    padding: 16px;
-  }
+/* ==========================================================
+   INPUT DESABILITADO
+========================================================== */
 
-  .login-container {
-    padding: 28px 20px;
-    border-radius: 12px;
-  }
+.campo-formulario input:disabled{
 
-  .login-cabecalho {
-    margin-bottom: 24px;
-  }
+    opacity:.65;
 
-  .login-cabecalho h1 {
-    margin-bottom: 22px;
-    font-size: 27px;
-  }
+    cursor:not-allowed;
 
-  .login-cabecalho h2 {
-    font-size: 22px;
-  }
+}
 
-  .login-cabecalho p {
-    font-size: 14px;
-  }
+/* ==========================================================
+   AUTOFILL (Chrome)
+========================================================== */
 
-  #form-login {
-    gap: 16px;
-  }
+input:-webkit-autofill{
 
-  .campo-formulario input {
-    padding: 13px 14px;
-    font-size: 15px;
-  }
+    -webkit-box-shadow:
 
-  #botao-entrar {
-    padding: 13px;
-    font-size: 15px;
-  }
+        0 0 0 1000px rgba(255,255,255,.05) inset;
+
+    -webkit-text-fill-color:white;
+
+    transition:
+
+        background-color 9999s;
+
+}
+
+/* ==========================================================
+   MOSTRAR SENHA
+========================================================== */
+
+.mostrar-senha{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:-6px;
+
+    user-select:none;
+
+}
+
+/* ==========================================================
+   CHECKBOX
+========================================================== */
+
+.mostrar-senha input{
+
+    width:17px;
+
+    height:17px;
+
+    accent-color:var(--primary-color);
+
+    cursor:pointer;
+
+}
+
+/* ==========================================================
+   TEXTO CHECKBOX
+========================================================== */
+
+.mostrar-senha label{
+
+    color:var(--color-text);
+
+    font-size:.92rem;
+
+    cursor:pointer;
+
+    transition:color .25s;
+
+}
+
+.mostrar-senha:hover label{
+
+    color:var(--color-white);
+
+}
+
+/* ==========================================================
+   MENSAGEM
+========================================================== */
+
+#mensagem-login{
+
+    min-height:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    color:var(--color-error);
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   BOTÃO
+========================================================== */
+
+#botao-entrar{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+
+    padding:16px 20px;
+
+    border:none;
+
+    border-radius:var(--radius-md);
+
+    cursor:pointer;
+
+    font-family:var(--primary-font);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    letter-spacing:.3px;
+
+    color:var(--secondary-color);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #4dff2f,
+            #39ff14 50%,
+            #22d10b
+        );
+
+    box-shadow:var(--shadow-button);
+
+    transition:
+
+        transform var(--transition),
+
+        box-shadow var(--transition),
+
+        filter var(--transition);
+
+}
+
+/* ==========================================================
+   BRILHO DO BOTÃO
+========================================================== */
+
+#botao-entrar::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent,
+
+            rgba(255,255,255,.45),
+
+            transparent
+
+        );
+
+    transition:left .8s;
+
+}
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+#botao-entrar:hover{
+
+    transform:
+
+        translateY(-2px);
+
+    box-shadow:
+
+        0 18px 40px rgba(57,255,20,.28);
+
+}
+
+/* passa o brilho */
+
+#botao-entrar:hover::before{
+
+    left:140%;
+
+}
+
+/* ==========================================================
+   ACTIVE
+========================================================== */
+
+#botao-entrar:active{
+
+    transform:
+
+        scale(.98);
+
+}
+
+/* ==========================================================
+   FOCUS
+========================================================== */
+
+#botao-entrar:focus-visible{
+
+    outline:none;
+
+    box-shadow:
+
+        0 0 0 4px rgba(57,255,20,.22),
+
+        0 18px 40px rgba(57,255,20,.25);
+
+}
+
+/* ==========================================================
+   DESABILITADO
+========================================================== */
+
+#botao-entrar:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.login-links{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:-6px;
+
+}
+
+.login-links a{
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+
+    text-decoration:none;
+
+    transition:
+
+        color .25s;
+
+}
+
+.login-links a:hover{
+
+    color:var(--primary-color);
+
+}
+
+/* ==========================================================
+   RODAPÉ
+========================================================== */
+
+.login-footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:var(--color-text);
+
+    font-size:.92rem;
+
+}
+
+.login-footer a{
+
+    color:var(--primary-color);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.login-footer a:hover{
+
+    color:#6dff55;
+
+}
+
+/* ==========================================================
+   SELEÇÃO
+========================================================== */
+
+::selection{
+
+    background:rgba(57,255,20,.35);
+
+    color:white;
+
+}
+
+/* ==========================================================
+   FOCUS
+========================================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible{
+
+    outline:2px solid rgba(57,255,20,.5);
+
+    outline-offset:3px;
+
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 768px){
+
+    main{
+
+        padding:20px;
+
+    }
+
+    .login-container{
+
+        padding:36px 28px;
+
+        border-radius:18px;
+
+    }
+
+    .logo-cabecalho{
+
+        width:64px;
+
+    }
+
+    .login-cabecalho{
+
+        margin-bottom:32px;
+
+    }
+
+    .login-cabecalho h2{
+
+        font-size:1.65rem;
+
+    }
+
+    .login-cabecalho p{
+
+        font-size:.92rem;
+
+    }
+
+}
+
+/* ==========================================================
+   CELULARES
+========================================================== */
+
+@media (max-width:480px){
+
+    main{
+
+        padding:16px;
+
+    }
+
+    .login-container{
+
+        padding:28px 22px;
+
+        border-radius:16px;
+
+    }
+
+    .logo-cabecalho{
+
+        width:56px;
+
+    }
+
+    .divider-container{
+
+        margin:26px 0;
+
+    }
+
+    .login-cabecalho{
+
+        margin-bottom:28px;
+
+    }
+
+    .login-cabecalho h2{
+
+        font-size:1.45rem;
+
+    }
+
+    .login-cabecalho p{
+
+        font-size:.88rem;
+
+    }
+
+    .campo-formulario input{
+
+        padding:15px;
+
+    }
+
+    #botao-entrar{
+
+        padding:15px;
+
+    }
+
+    .login-links{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        align-items:flex-start;
+
+    }
+
+}
+
+/* ==========================================================
+   TELAS MUITO PEQUENAS
+========================================================== */
+
+@media (max-width:340px){
+
+    .login-container{
+
+        padding:22px 18px;
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
 }
