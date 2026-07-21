@@ -1,15 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema Bancario</title>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login | K2 Banco Digital</title>
+  <link rel="stylesheet" href="css/login.css">
+  <script src="js/login.js" defer></script>
+  <script></script>
+
 </head>
 
 <body>
-  <h1>sistema bancario javascript</h1>
-</body>
-<script src="app.js"></script>
+  <main>
+    <section class="login-container">
+      <header class="login-cabecalho">
+        <h1>K2 Banco Digital</h1>
+        <h2>Acesse sua conta</h2>
 
-</html>
+        <p>Entre com seus dados para acessar sua conta.</p>
+      </header>
+
+      <form id="form-login">
+        <div class="campo-formulario">
+          <label for="email">E-mail</label>
+
+          <input type="email" id="email" name="email" placeholder="exemplo@k2banco.com" autocomplete="email" />
+        </div>
+
+        <div class="campo-formulario">
+          <label for="senha">Senha</label>
+
+          <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" />
+        </div>
+
+        <div class="mostrar-senha">
+          <input type="checkbox" id="checkbox-mostrar-senha" />
+
+          <label for="checkbox-mostrar-senha">
+            Mostrar senha
+          </label>
+        </div>
+
+        <p id="mensagem-login" aria-live="polite"></p>
+
+        <button type="submit" id="botao-entrar">
+          Entrar
+        </button>
+      </form>
+    </section>
+  </main>
+</body>

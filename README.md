@@ -1,8 +1,8 @@
-# 🏦 Sistema Bancário em JavaScript
+# 🏦 K2 Banco Digital
 
-Projeto educacional desenvolvido para praticar lógica de programação e fundamentos de JavaScript por meio da evolução contínua de um sistema bancário.
+Projeto educacional desenvolvido para praticar lógica de programação, JavaScript, manipulação do DOM, HTML, CSS, Git e GitHub por meio da evolução contínua de um sistema bancário.
 
-O sistema funciona no navegador utilizando `prompt()` e `alert()`. Atualmente, permite cadastrar um cliente, consultar o saldo, realizar depósitos e saques, visualizar o extrato, filtrar transações, buscar uma operação pelo ID e consultar os dados da conta.
+A versão atual adiciona uma página de login responsiva para controlar o acesso visual ao sistema. O login funciona apenas no front-end e utiliza credenciais simuladas para fins de estudo.
 
 ---
 
@@ -10,139 +10,150 @@ O sistema funciona no navegador utilizando `prompt()` e `alert()`. Atualmente, p
 
 🚧 Projeto em desenvolvimento
 
-**Versão atual: `v3.1.1`**
-
-A versão `v3.1.1` é uma atualização de correção que melhora as validações, as mensagens e a formatação dos valores exibidos pelo sistema.
+**Versão atual: `v4.0.0`**
 
 ---
 
 ## 🎯 Objetivo
 
-O objetivo deste projeto é aplicar os conteúdos estudados em uma aplicação que evolui por versões.
+O objetivo do projeto é transformar gradualmente um sistema bancário executado com `prompt()` e `alert()` em uma aplicação visual completa.
 
-Além de JavaScript, o projeto também é utilizado para praticar:
+Durante o desenvolvimento, são praticados:
 
+- Lógica de programação;
+- JavaScript;
+- Manipulação do DOM;
+- Eventos;
+- Validação de formulários;
+- HTML semântico;
+- CSS responsivo;
 - Git e GitHub;
-- criação e exclusão de branches;
-- commits organizados;
+- Branches;
+- Commits;
 - Pull Requests;
-- tags e releases;
-- versionamento semântico.
+- Tags;
+- Releases;
+- Versionamento semântico.
 
 ---
 
-## ✨ Funcionalidades
+## 🆕 Novidades da v4.0.0
 
-### Cadastro do cliente
+A versão `v4.0.0` inicia a migração do projeto para uma interface visual.
 
-- Cadastro do nome;
-- Cadastro da idade;
-- Escolha do tipo da conta;
-- Validação de nome vazio;
-- Bloqueio de números no nome;
-- Validação de idade vazia;
-- Validação de idade não numérica;
-- Bloqueio de idade decimal;
-- Bloqueio de idade menor ou igual a zero;
-- Validação do tipo da conta;
-- Tratamento do cancelamento durante o cadastro.
+Nesta versão, foi criada uma página de login utilizando HTML, CSS, JavaScript e manipulação do DOM.
 
-### Dados da conta
+### Principais mudanças
 
-- Dados do cliente organizados em um objeto;
-- Conta armazenada como objeto interno;
-- Exibição do nome e da idade;
-- Exibição da agência;
-- Exibição do número da conta;
-- Exibição do tipo da conta;
-- Exibição do saldo atual.
+- Criação de uma página de login;
+- Utilização do `index.html` como página inicial;
+- Redirecionamento para `painel.html` após o login;
+- Campos de e-mail e senha;
+- Validação de campos vazios;
+- Validação das credenciais;
+- Mensagens de erro exibidas na própria página;
+- Opção para mostrar ou esconder a senha;
+- Limpeza automática das mensagens ao digitar;
+- Envio do formulário pelo botão ou pela tecla `Enter`;
+- Layout responsivo;
+- Aplicação da identidade visual do K2 Banco Digital;
+- Utilização da fonte Inter;
+- Utilização de variáveis CSS.
 
-### Operações bancárias
+---
 
+## 🔐 Credenciais de teste
+
+Utilize as seguintes credenciais para acessar o sistema:
+
+```text
+E-mail: clienteK@k2banco.com
+Senha: jovemtech
+```
+
+> As credenciais são utilizadas apenas para simular um login durante os estudos.
+
+---
+
+## ⚠️ Aviso sobre autenticação
+
+O login da versão `v4.0.0` é apenas uma simulação feita no front-end.
+
+As credenciais ficam armazenadas no JavaScript e podem ser visualizadas pelo navegador. Além disso, o arquivo `painel.html` ainda pode ser acessado diretamente pela URL.
+
+Esta versão não utiliza:
+
+- Backend;
+- Banco de dados;
+- Criptografia de senha;
+- Sessões;
+- Tokens;
+- Proteção real de rotas;
+- `sessionStorage` ou `localStorage` para autenticação.
+
+Uma autenticação segura será implementada futuramente após o estudo de desenvolvimento backend.
+
+---
+
+## ✨ Funcionalidades atuais
+
+### Página de login
+
+- Campo de e-mail;
+- Campo de senha;
+- Botão para entrar;
+- Checkbox para mostrar ou esconder a senha;
+- Validação de campos vazios;
+- Validação de credenciais incorretas;
+- Mensagem de erro na página;
+- Limpeza da mensagem ao alterar os campos;
+- Redirecionamento para o painel;
+- Funcionamento pela tecla `Enter`;
+- Layout responsivo.
+
+### Sistema bancário
+
+- Cadastro básico do cliente;
 - Consulta de saldo;
-- Realização de depósitos;
-- Realização de saques;
-- Verificação de saldo insuficiente;
-- Bloqueio de depósitos e saques menores ou iguais a zero;
-- Tratamento de campos vazios;
-- Tratamento de operações canceladas;
-- Validação de valores não numéricos;
-- Encerramento do sistema pelo menu.
-
-### Histórico e extrato
-
-- Registro de depósitos e saques;
-- Transações armazenadas como objetos;
-- Identificador único para cada transação;
-- Registro de data e horário;
-- Exibição do extrato completo;
-- Total depositado;
-- Total sacado;
-- Quantidade de depósitos;
-- Quantidade de saques;
-- Quantidade total de operações;
-- Saldo atual no resumo da conta.
-
-### Filtros e busca
-
-- Filtro para visualizar somente depósitos;
-- Filtro para visualizar somente saques;
-- Busca de uma transação pelo ID;
-- Validação de ID vazio;
-- Validação de ID não numérico;
-- Bloqueio de ID decimal;
-- Bloqueio de ID menor ou igual a zero;
-- Mensagem quando o ID não é encontrado.
-
-## 🧠 Conceitos praticados
-
-- Variáveis com `let`;
-- Tipos de dados;
-- Conversão com `Number()`;
-- Condicionais;
-- Operadores de comparação;
-- Operadores lógicos;
-- Laço `while`;
-- Laço `for`;
-- Funções;
-- Parâmetros e retorno;
-- Arrays;
-- Objetos;
-- Objetos aninhados;
-- Arrays de objetos;
-- Método `push()`;
-- Método `filter()`;
-- Método `find()`;
-- Método `reduce()`;
-- Propriedade `length`;
-- `Number.isFinite()`;
-- `Number.isInteger()`;
-- Método `trim()`;
-- Expressão regular com `/\d/`;
-- Template strings;
-- Objeto `Date`;
-- `toLocaleDateString()`;
-- `toLocaleTimeString()`;
-- `toLocaleString()`;
-- Valor `null`;
-- Valor `undefined`;
-- Comandos `break` e `continue`.
+- Depósitos;
+- Saques;
+- Validação de valores;
+- Histórico de transações;
+- Extrato completo;
+- Filtro de depósitos;
+- Filtro de saques;
+- Busca por ID;
+- Resumo da conta;
+- Exibição dos dados do cliente;
+- Formatação monetária no padrão brasileiro.
 
 ---
 
 ## 📋 Histórico de versões
 
+### v4.0.0 — Página de login com DOM
+
+- Criação da interface de login;
+- HTML semântico;
+- CSS responsivo;
+- Identidade visual do K2 Banco Digital;
+- Fonte Inter;
+- Variáveis CSS;
+- Captura de elementos com DOM;
+- Validação de formulário;
+- Mensagens na página;
+- Mostrar e esconder senha;
+- Redirecionamento para o painel.
+
 ### v3.1.1 — Validações e correções
 
 - Validação do cadastro;
-- Tratamento do cancelamento do cadastro;
-- Tratamento de campos com espaços;
-- Tratamento do cancelamento do menu;
+- Tratamento de cancelamentos;
+- Tratamento de espaços;
 - Validação aprimorada de depósitos e saques;
-- Validação aprimorada da busca por ID;
-- Formatação monetária no padrão brasileiro;
-- Padronização de mensagens;
-- Exibição do saldo nos dados da conta.
+- Validação da busca por ID;
+- Formatação monetária brasileira;
+- Padronização das mensagens.
 
 ### v3.1.0 — Filtros, busca e cálculos
 
@@ -152,43 +163,36 @@ Além de JavaScript, o projeto também é utilizado para praticar:
 - Filtro de depósitos;
 - Filtro de saques;
 - Busca de transação por ID;
-- Totais calculados com `reduce()`;
-- Quantidade de depósitos e saques;
-- Novo menu com oito opções.
+- Totais calculados com `reduce()`.
 
 ### v3.0.0 — Objetos e dados da conta
 
 - Cadastro básico do cliente;
-- Dados do cliente organizados em objeto;
+- Dados organizados em objetos;
 - Conta como objeto interno;
-- Saldo armazenado dentro da conta;
 - Transações armazenadas como objetos;
-- Um único Array de transações;
 - IDs únicos;
-- Data e horário das operações;
-- Nova opção para visualizar os dados da conta;
-- Extrato adaptado para Arrays de Objetos.
+- Data e horário;
+- Exibição dos dados da conta.
 
 ### v2.1.0 — Resumo da conta
 
 - Numeração das transações;
-- Exibição do saldo atual;
-- Quantidade de operações;
 - Total depositado;
 - Total sacado;
-- Resumo da conta.
+- Quantidade de operações;
+- Saldo no resumo.
 
 ### v2.0.1 — Correções e melhorias
 
 - Tratamento de operações canceladas;
 - Tratamento de campos vazios;
-- Validação de valores não numéricos;
-- Melhorias nas mensagens;
-- Ajustes de organização e formatação.
+- Validação de valores;
+- Melhorias nas mensagens.
 
 ### v2.0.0 — Histórico e extrato
 
-- Criação do histórico de transações;
+- Histórico de transações;
 - Registro de depósitos;
 - Registro de saques;
 - Implementação do extrato;
@@ -207,13 +211,14 @@ Além de JavaScript, o projeto também é utilizado para praticar:
 - Depósito;
 - Saque;
 - Menu interativo;
-- Funções para operações bancárias.
+- Funções bancárias.
 
 ---
 
 ## 🛠️ Tecnologias utilizadas
 
-- HTML;
+- HTML5;
+- CSS3;
 - JavaScript;
 - Git;
 - GitHub;
@@ -241,8 +246,10 @@ Este é um projeto educacional.
 
 O sistema não possui conexão com bancos reais, não utiliza dados financeiros verdadeiros e não deve ser utilizado para operações bancárias reais.
 
+A página de login não representa uma autenticação segura.
+
 ---
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Kherlysson Ryann** durante os estudos de lógica de programação e JavaScript.
+Desenvolvido por **Kherlysson Ryann** durante os estudos de lógica de programação, JavaScript e desenvolvimento front-end.
