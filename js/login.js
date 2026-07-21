@@ -19,7 +19,7 @@ formLogin.addEventListener("submit", function (evento) {
     return;
   }
   if (emailDigitado === emailCorreto && senhaDigitada === senhaCorreta) {
-    window.location.href = "index.html";
+    window.location.href = "painel.html";
   } else {
     mensagemLogin.textContent = "E-mail ou senha incorretos.";
   }
