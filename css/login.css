@@ -49,12 +49,18 @@
    RESET
 ========================================================== */
 
-*,
-*::before,
-*::after{
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
 }
 
 html{
@@ -155,7 +161,7 @@ main{
    CARD DE LOGIN
 ========================================================== */
 
-.login-container{
+.login-container {
 
     position:relative;
 
@@ -180,6 +186,10 @@ main{
     animation:surgir .8s ease;
 
     isolation:isolate;
+
+    will-change:
+    transform,
+    opacity;
 
 }
 
@@ -639,7 +649,13 @@ input:-webkit-autofill{
 
 #mensagem-login{
 
-    min-height:22px;
+    min-height:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     text-align:center;
 
@@ -651,107 +667,401 @@ input:-webkit-autofill{
 
 }
 
-/* Botão principal */
-#botao-entrar {
-  width: 100%;
+/* ==========================================================
+   BOTÃO
+========================================================== */
 
-  padding: 16px;
+#botao-entrar{
 
-  border: none;
+    position:relative;
 
-  border-radius: 14px;
+    overflow:hidden;
 
-  background: linear-gradient(135deg, #4dff2f, #2ee80f 55%, #20ba0d);
+    width:100%;
 
-  color: #030712;
+    padding:16px 20px;
 
-  font-weight: 700;
+    border:none;
 
-  font-size: 16px;
+    border-radius:var(--radius-md);
 
-  cursor: pointer;
+    cursor:pointer;
 
-  transition: 0.3s;
+    font-family:var(--primary-font);
 
-  box-shadow: 0 10px 30px rgba(57, 255, 20, 0.18);
-  letter-spacing: 0.3px;
+    font-size:1rem;
+
+    font-weight:700;
+
+    letter-spacing:.3px;
+
+    color:var(--secondary-color);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #4dff2f,
+            #39ff14 50%,
+            #22d10b
+        );
+
+    box-shadow:var(--shadow-button);
+
+    transition:
+
+        transform var(--transition),
+
+        box-shadow var(--transition),
+
+        filter var(--transition);
+
 }
 
-/* Efeito ao passar o mouse */
-#botao-entrar:hover {
-  transform: translateY(-2px);
+/* ==========================================================
+   BRILHO DO BOTÃO
+========================================================== */
 
-  box-shadow: 0 18px 38px rgba(57, 255, 20, 0.28);
+#botao-entrar::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent,
+
+            rgba(255,255,255,.45),
+
+            transparent
+
+        );
+
+    transition:left .8s;
+
 }
 
-/* Efeito ao pressionar */
-#botao-entrar:active {
-  transform: scale(0.98);
+/* ==========================================================
+   HOVER
+========================================================== */
+
+#botao-entrar:hover{
+
+    transform:
+
+        translateY(-2px);
+
+    box-shadow:
+
+        0 18px 40px rgba(57,255,20,.28);
+
 }
 
-/* Navegação pelo teclado */
-#botao-entrar:focus {
-  outline: 3px solid rgba(57, 255, 20, 0.25);
-  outline-offset: 3px;
+/* passa o brilho */
+
+#botao-entrar:hover::before{
+
+    left:140%;
+
 }
 
-@keyframes surgir {
-  from {
-    opacity: 0;
+/* ==========================================================
+   ACTIVE
+========================================================== */
 
-    transform: translateY(40px) scale(0.96);
+#botao-entrar:active{
 
-    filter: blur(12px);
-  }
+    transform:
 
-  to {
-    opacity: 1;
+        scale(.98);
 
-    transform: translateY(0) scale(1);
-
-    filter: blur(0);
-  }
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
-  main {
-    padding: 16px;
-  }
+/* ==========================================================
+   FOCUS
+========================================================== */
 
-  .login-container {
-    padding: 28px 20px;
-    border-radius: 12px;
-  }
+#botao-entrar:focus-visible{
 
-  .login-cabecalho {
-    margin-bottom: 24px;
-  }
+    outline:none;
 
-  .login-cabecalho h1 {
-    margin-bottom: 22px;
-    font-size: 27px;
-  }
+    box-shadow:
 
-  .login-cabecalho h2 {
-    font-size: 22px;
-  }
+        0 0 0 4px rgba(57,255,20,.22),
 
-  .login-cabecalho p {
-    font-size: 14px;
-  }
+        0 18px 40px rgba(57,255,20,.25);
 
-  #form-login {
-    gap: 16px;
-  }
+}
 
-  .campo-formulario input {
-    padding: 13px 14px;
-    font-size: 15px;
-  }
+/* ==========================================================
+   DESABILITADO
+========================================================== */
 
-  #botao-entrar {
-    padding: 13px;
-    font-size: 15px;
-  }
+#botao-entrar:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.login-links{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:-6px;
+
+}
+
+.login-links a{
+
+    color:var(--color-text);
+
+    font-size:.9rem;
+
+    text-decoration:none;
+
+    transition:
+
+        color .25s;
+
+}
+
+.login-links a:hover{
+
+    color:var(--primary-color);
+
+}
+
+/* ==========================================================
+   RODAPÉ
+========================================================== */
+
+.login-footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:var(--color-text);
+
+    font-size:.92rem;
+
+}
+
+.login-footer a{
+
+    color:var(--primary-color);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.login-footer a:hover{
+
+    color:#6dff55;
+
+}
+
+/* ==========================================================
+   SELEÇÃO
+========================================================== */
+
+::selection{
+
+    background:rgba(57,255,20,.35);
+
+    color:white;
+
+}
+
+/* ==========================================================
+   FOCUS
+========================================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible{
+
+    outline:2px solid rgba(57,255,20,.5);
+
+    outline-offset:3px;
+
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 768px){
+
+    main{
+
+        padding:20px;
+
+    }
+
+    .login-container{
+
+        padding:36px 28px;
+
+        border-radius:18px;
+
+    }
+
+    .logo-cabecalho{
+
+        width:64px;
+
+    }
+
+    .login-cabecalho{
+
+        margin-bottom:32px;
+
+    }
+
+    .login-cabecalho h2{
+
+        font-size:1.65rem;
+
+    }
+
+    .login-cabecalho p{
+
+        font-size:.92rem;
+
+    }
+
+}
+
+/* ==========================================================
+   CELULARES
+========================================================== */
+
+@media (max-width:480px){
+
+    main{
+
+        padding:16px;
+
+    }
+
+    .login-container{
+
+        padding:28px 22px;
+
+        border-radius:16px;
+
+    }
+
+    .logo-cabecalho{
+
+        width:56px;
+
+    }
+
+    .divider-container{
+
+        margin:26px 0;
+
+    }
+
+    .login-cabecalho{
+
+        margin-bottom:28px;
+
+    }
+
+    .login-cabecalho h2{
+
+        font-size:1.45rem;
+
+    }
+
+    .login-cabecalho p{
+
+        font-size:.88rem;
+
+    }
+
+    .campo-formulario input{
+
+        padding:15px;
+
+    }
+
+    #botao-entrar{
+
+        padding:15px;
+
+    }
+
+    .login-links{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        align-items:flex-start;
+
+    }
+
+}
+
+/* ==========================================================
+   TELAS MUITO PEQUENAS
+========================================================== */
+
+@media (max-width:340px){
+
+    .login-container{
+
+        padding:22px 18px;
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
 }
