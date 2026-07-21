@@ -10,9 +10,9 @@ O sistema funciona no navegador utilizando `prompt()` e `alert()`. Atualmente, p
 
 🚧 Projeto em desenvolvimento
 
-**Versão atual: `v3.1.0`**
+**Versão atual: `v3.1.1`**
 
-O projeto recebe novas funcionalidades conforme novos conteúdos de JavaScript são estudados.
+A versão `v3.1.1` é uma atualização de correção que melhora as validações, as mensagens e a formatação dos valores exibidos pelo sistema.
 
 ---
 
@@ -33,14 +33,29 @@ Além de JavaScript, o projeto também é utilizado para praticar:
 
 ## ✨ Funcionalidades
 
-### Cadastro e dados da conta
+### Cadastro do cliente
 
-- Cadastro básico do nome do cliente;
+- Cadastro do nome;
 - Cadastro da idade;
 - Escolha do tipo da conta;
-- Exibição dos dados do cliente;
-- Exibição da agência, número e tipo da conta;
-- Dados organizados em objetos.
+- Validação de nome vazio;
+- Bloqueio de números no nome;
+- Validação de idade vazia;
+- Validação de idade não numérica;
+- Bloqueio de idade decimal;
+- Bloqueio de idade menor ou igual a zero;
+- Validação do tipo da conta;
+- Tratamento do cancelamento durante o cadastro.
+
+### Dados da conta
+
+- Dados do cliente organizados em um objeto;
+- Conta armazenada como objeto interno;
+- Exibição do nome e da idade;
+- Exibição da agência;
+- Exibição do número da conta;
+- Exibição do tipo da conta;
+- Exibição do saldo atual.
 
 ### Operações bancárias
 
@@ -66,71 +81,68 @@ Além de JavaScript, o projeto também é utilizado para praticar:
 - Quantidade de depósitos;
 - Quantidade de saques;
 - Quantidade total de operações;
-- Saldo atual no resumo da conta;
-- Mensagem para extrato sem movimentações.
+- Saldo atual no resumo da conta.
 
 ### Filtros e busca
 
-- Filtro para visualizar apenas depósitos;
-- Filtro para visualizar apenas saques;
+- Filtro para visualizar somente depósitos;
+- Filtro para visualizar somente saques;
 - Busca de uma transação pelo ID;
-- Mensagem quando o ID não é encontrado;
-- Validação do ID informado;
-- Mensagem quando não existem operações do tipo escolhido.
-
----
-
-## 🆕 Novidades da v3.1.0
-
-A versão `v3.1.0` adiciona novos recursos utilizando métodos de Arrays.
-
-### Principais mudanças
-
-- Uso de `filter()` para separar depósitos e saques;
-- Uso de `find()` para buscar uma transação pelo ID;
-- Uso de `reduce()` para calcular os totais;
-- Nova opção para filtrar transações;
-- Nova opção para buscar uma transação;
-- Exibição da quantidade de depósitos;
-- Exibição da quantidade de saques;
-- Melhor organização da formatação das transações;
-- Atualização do menu principal de 6 para 8 opções.
-
----
+- Validação de ID vazio;
+- Validação de ID não numérico;
+- Bloqueio de ID decimal;
+- Bloqueio de ID menor ou igual a zero;
+- Mensagem quando o ID não é encontrado.
 
 ## 🧠 Conceitos praticados
 
 - Variáveis com `let`;
 - Tipos de dados;
 - Conversão com `Number()`;
-- Validação com `Number.isNaN()`;
-- Validação com `Number.isInteger()`;
-- Condicionais com `if`, `else if` e `else`;
-- Operadores de comparação e operadores lógicos;
-- Laços `while` e `for`;
+- Condicionais;
+- Operadores de comparação;
+- Operadores lógicos;
+- Laço `while`;
+- Laço `for`;
 - Funções;
 - Parâmetros e retorno;
-- Escopo de variáveis;
 - Arrays;
 - Objetos;
 - Objetos aninhados;
 - Arrays de objetos;
-- Acesso e alteração de propriedades;
 - Método `push()`;
 - Método `filter()`;
 - Método `find()`;
 - Método `reduce()`;
 - Propriedade `length`;
+- `Number.isFinite()`;
+- `Number.isInteger()`;
+- Método `trim()`;
+- Expressão regular com `/\d/`;
 - Template strings;
-- Formatação com `toFixed()`;
 - Objeto `Date`;
 - `toLocaleDateString()`;
 - `toLocaleTimeString()`;
-- Valor `undefined`.
+- `toLocaleString()`;
+- Valor `null`;
+- Valor `undefined`;
+- Comandos `break` e `continue`.
 
 ---
 
 ## 📋 Histórico de versões
+
+### v3.1.1 — Validações e correções
+
+- Validação do cadastro;
+- Tratamento do cancelamento do cadastro;
+- Tratamento de campos com espaços;
+- Tratamento do cancelamento do menu;
+- Validação aprimorada de depósitos e saques;
+- Validação aprimorada da busca por ID;
+- Formatação monetária no padrão brasileiro;
+- Padronização de mensagens;
+- Exibição do saldo nos dados da conta.
 
 ### v3.1.0 — Filtros, busca e cálculos
 
@@ -211,11 +223,9 @@ A versão `v3.1.0` adiciona novos recursos utilizando métodos de Arrays.
 
 ## 🌿 Fluxo de desenvolvimento
 
-O projeto utiliza o seguinte fluxo:
-
 1. Criar uma branch;
-2. Desenvolver as funcionalidades;
-3. Fazer commits separados;
+2. Desenvolver as alterações;
+3. Fazer commits organizados;
 4. Enviar a branch para o GitHub;
 5. Abrir um Pull Request;
 6. Fazer o merge na `main`;
