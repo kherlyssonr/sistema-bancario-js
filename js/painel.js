@@ -589,6 +589,13 @@ proximoId++;
 console.log(cliente.conta.transacoes);
 
 const quantidadeOperacacoes = document.getElementById("quantidade-operacoes");
-quantidadeOperacacoes.textContent = cliente.conta.transacoes.push();
+quantidadeOperacacoes.textContent = cliente.conta.transacoes.length;
 
 const totalDepositadoElemento = document.getElementById("total-depositado");
+
+const depositos = cliente.conta.transacoes.filter(function (transacao) {
+  return transacao.tipo === "deposito";
+});
+
+const totalDepositado = calcularTotalTransacoes(depositos);
+totalDepositadoElemento.textContent = formatarMoeda(totalDepositado);
