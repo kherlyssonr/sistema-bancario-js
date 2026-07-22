@@ -382,9 +382,9 @@ main{
 
 .divider-icon{
 
-    width:42px;
+    width:55px;
 
-    height:42px;
+    height:55px;
 
     display:flex;
 
@@ -406,7 +406,7 @@ main{
 
 .divider-icon img{
 
-    width:22px;
+    width:32px;
 
     opacity:.9;
 
