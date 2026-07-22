@@ -280,17 +280,19 @@ main{
 
 .logo-cabecalho{
 
-    width:72px;
+    width:120px;
 
-    margin-bottom:18px;
+    height: auto;
+
+    margin-bottom:5px;
 
     user-select:none;
 
-    filter:
+    /* filter:
 
         drop-shadow(
             0 0 15px rgba(57,255,20,.35)
-        );
+        ); */
 
 }
 
