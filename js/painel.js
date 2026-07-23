@@ -764,6 +764,51 @@ formSaque.addEventListener("submit", function (evento) {
   const totalSacado = calcularTotalTransacoes(saques);
   totalSacadoElemento.textContent = formatarMoeda(totalSacado);
 
+  // Remover a mensagem de extrato vazio
+  if (linhaSemTransacoes && linhaSemTransacoes.isConnected) {
+    linhaSemTransacoes.remove();
+  }
+
+  // Formatar data e horário da transação
+  const dataFormatada = novaTransacao.momento.toLocaleDateString("pt-BR");
+
+  const horarioFormatado = novaTransacao.momento.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  // Criar uma nova linha da tabela
+  const novaLinha = document.createElement("tr");
+
+  // Criar as células
+  const celulaId = document.createElement("td");
+  const celulaTipo = document.createElement("td");
+  const celulaData = document.createElement("td");
+  const celulaHorario = document.createElement("td");
+  const celulaValor = document.createElement("td");
+
+  // Preencher as células
+  celulaId.textContent = novaTransacao.id;
+  celulaTipo.textContent = "Saque";
+  celulaData.textContent = dataFormatada;
+  celulaHorario.textContent = horarioFormatado;
+  celulaValor.textContent = formatarMoeda(novaTransacao.valor);
+
+  // Aplicar as classes do CSS
+  celulaTipo.classList.add("tipo-transacao", "tipo-saque");
+
+  celulaValor.classList.add("valor-saque");
+
+  // Colocar as células dentro da linha
+  novaLinha.appendChild(celulaId);
+  novaLinha.appendChild(celulaTipo);
+  novaLinha.appendChild(celulaData);
+  novaLinha.appendChild(celulaHorario);
+  novaLinha.appendChild(celulaValor);
+
+  // Colocar a linha na tabela do extrato
+  listaTransacoes.appendChild(novaLinha);
+
   // Mostrar mensagem de sucesso
   mensagemSaque.textContent = "Saque realizado com sucesso.";
 
