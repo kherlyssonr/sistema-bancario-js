@@ -1,10 +1,10 @@
 /*
   K2 Banco Digital — versão 4.1.0
 
-  Sistema bancário utilizando:
+  Painel bancário desenvolvido com:
   - Objetos
-  - Arrays
-  - Métodos de Arrays
+  - Arrays de objetos
+  - Métodos filter(), find(), reduce() e forEach()
   - Manipulação do DOM
   - Eventos de formulário
 */
@@ -16,7 +16,6 @@
 const cliente = {
   nome: "Kherlysson Ryann",
   idade: 25,
-
   conta: {
     agencia: "0001",
     numero: "12345-6",
@@ -32,7 +31,6 @@ let proximoId = 1;
    FUNÇÕES DO SISTEMA
    ========================================================== */
 
-// Formata um número como moeda brasileira
 function formatarMoeda(valor) {
   return valor.toLocaleString("pt-BR", {
     style: "currency",
@@ -40,31 +38,61 @@ function formatarMoeda(valor) {
   });
 }
 
-// Retorna o saldo atual
 function consultarSaldo() {
   return cliente.conta.saldo;
 }
 
-// Soma o depósito ao saldo
 function depositar(saldoAtual, depositoFeito) {
   return saldoAtual + depositoFeito;
 }
 
-// Subtrai o saque do saldo
 function sacar(saldoAtual, saqueFeito) {
   return saldoAtual - saqueFeito;
 }
 
-// Soma os valores das transações recebidas
 function calcularTotalTransacoes(listaTransacoes) {
   return listaTransacoes.reduce(function (total, transacao) {
     return total + transacao.valor;
   }, 0);
 }
 
+function mostrarMensagem(elemento, texto, tipo) {
+  elemento.textContent = texto;
+
+  elemento.classList.remove("mensagem-sucesso", "mensagem-erro");
+
+  if (tipo === "sucesso") {
+    elemento.classList.add("mensagem-sucesso");
+  } else {
+    elemento.classList.add("mensagem-erro");
+  }
+}
+
+function limparMensagem(elemento) {
+  elemento.textContent = "";
+
+  elemento.classList.remove("mensagem-sucesso", "mensagem-erro");
+}
+
+function registrarTransacao(tipo, valor) {
+  const novaTransacao = {
+    id: proximoId,
+    tipo: tipo,
+    valor: valor,
+    momento: new Date(),
+  };
+
+  cliente.conta.transacoes.push(novaTransacao);
+  proximoId++;
+
+  return novaTransacao;
+}
+
 /* ==========================================================
-   ELEMENTOS DO CLIENTE
+   CAPTURA DOS ELEMENTOS DO DOM
    ========================================================== */
+
+/* Dados do cliente */
 
 const nomeClienteCabecalho = document.getElementById("nome-cliente-cabecalho");
 
@@ -74,58 +102,19 @@ const nomeClientePerfil = document.getElementById("nome-cliente-perfil");
 
 const tipoContaPerfil = document.getElementById("tipo-conta-perfil");
 
-/* Mostrar dados do cliente */
-
-nomeClienteCabecalho.textContent = cliente.nome;
-nomeClienteMenu.textContent = cliente.nome;
-nomeClientePerfil.textContent = cliente.nome;
-tipoContaPerfil.textContent = cliente.conta.tipo;
-
-/* ==========================================================
-   ELEMENTOS DA CONTA
-   ========================================================== */
+/* Dados da conta */
 
 const contaAgencia = document.getElementById("conta-agencia");
-
 const contaNumero = document.getElementById("conta-numero");
-
 const contaTipo = document.getElementById("conta-tipo");
 
-/* Mostrar dados da conta */
-
-contaAgencia.textContent = cliente.conta.agencia;
-contaNumero.textContent = cliente.conta.numero;
-contaTipo.textContent = cliente.conta.tipo;
-
-/* ==========================================================
-   ELEMENTOS DO SALDO
-   ========================================================== */
+/* Saldo */
 
 const saldoValor = document.getElementById("saldo-valor");
 
 const botaoMostrarSaldo = document.getElementById("botao-mostrar-saldo");
 
-let saldoVisivel = true;
-
-/* Mostrar saldo inicial */
-
-saldoValor.textContent = formatarMoeda(consultarSaldo());
-
-/* Mostrar e esconder o saldo */
-
-botaoMostrarSaldo.addEventListener("click", function () {
-  if (saldoVisivel) {
-    saldoValor.textContent = "••••••";
-  } else {
-    saldoValor.textContent = formatarMoeda(cliente.conta.saldo);
-  }
-
-  saldoVisivel = !saldoVisivel;
-});
-
-/* ==========================================================
-   ELEMENTOS DO RESUMO
-   ========================================================== */
+/* Resumo */
 
 const quantidadeOperacoes = document.getElementById("quantidade-operacoes");
 
@@ -133,9 +122,20 @@ const totalDepositadoElemento = document.getElementById("total-depositado");
 
 const totalSacadoElemento = document.getElementById("total-sacado");
 
-/* ==========================================================
-   ELEMENTOS DO EXTRATO
-   ========================================================== */
+/* Depósito */
+
+const formDeposito = document.getElementById("form-deposito");
+const valorDepositado = document.getElementById("valor-deposito");
+
+const mensagemDeposito = document.getElementById("mensagem-deposito");
+
+/* Saque */
+
+const formSaque = document.getElementById("form-saque");
+const valorSaque = document.getElementById("valor-saque");
+const mensagemSaque = document.getElementById("mensagem-saque");
+
+/* Extrato */
 
 const listaTransacoes = document.getElementById("lista-transacoes");
 
@@ -148,31 +148,52 @@ const buscaTransacaoId = document.getElementById("busca-transacao-id");
 const mensagemExtrato = document.getElementById("mensagem-extrato");
 
 /* ==========================================================
-   RENDERIZAR AS TRANSAÇÕES
+   FUNÇÕES DA INTERFACE
    ========================================================== */
 
+let saldoVisivel = true;
+
+function atualizarSaldoNaTela() {
+  if (saldoVisivel) {
+    saldoValor.textContent = formatarMoeda(consultarSaldo());
+  } else {
+    saldoValor.textContent = "••••••";
+  }
+}
+
+function atualizarResumo() {
+  const depositos = cliente.conta.transacoes.filter(function (transacao) {
+    return transacao.tipo === "deposito";
+  });
+
+  const saques = cliente.conta.transacoes.filter(function (transacao) {
+    return transacao.tipo === "saque";
+  });
+
+  const totalDepositado = calcularTotalTransacoes(depositos);
+  const totalSacado = calcularTotalTransacoes(saques);
+
+  quantidadeOperacoes.textContent = cliente.conta.transacoes.length;
+  totalDepositadoElemento.textContent = formatarMoeda(totalDepositado);
+  totalSacadoElemento.textContent = formatarMoeda(totalSacado);
+}
+
 function renderizarTransacoes(lista) {
-  // Limpar as linhas atuais
   listaTransacoes.innerHTML = "";
 
-  // Verificar se o Array está vazio
   if (lista.length === 0) {
     const linhaVazia = document.createElement("tr");
-
     const celulaVazia = document.createElement("td");
 
     celulaVazia.colSpan = 5;
-
     celulaVazia.textContent = "Nenhuma transação encontrada.";
 
     linhaVazia.appendChild(celulaVazia);
-
     listaTransacoes.appendChild(linhaVazia);
 
     return;
   }
 
-  // Criar uma linha para cada transação
   lista.forEach(function (transacao) {
     const dataFormatada = transacao.momento.toLocaleDateString("pt-BR");
 
@@ -184,34 +205,23 @@ function renderizarTransacoes(lista) {
     const novaLinha = document.createElement("tr");
 
     const celulaId = document.createElement("td");
-
     const celulaTipo = document.createElement("td");
-
     const celulaData = document.createElement("td");
-
     const celulaHorario = document.createElement("td");
-
     const celulaValor = document.createElement("td");
 
     celulaId.textContent = transacao.id;
-
     celulaData.textContent = dataFormatada;
-
     celulaHorario.textContent = horarioFormatado;
-
     celulaValor.textContent = formatarMoeda(transacao.valor);
 
-    // Configurar depósito
     if (transacao.tipo === "deposito") {
       celulaTipo.textContent = "Depósito";
 
       celulaTipo.classList.add("tipo-transacao", "tipo-deposito");
 
       celulaValor.classList.add("valor-deposito");
-    }
-
-    // Configurar saque
-    else {
+    } else {
       celulaTipo.textContent = "Saque";
 
       celulaTipo.classList.add("tipo-transacao", "tipo-saque");
@@ -229,15 +239,39 @@ function renderizarTransacoes(lista) {
   });
 }
 
+function restaurarExtratoCompleto() {
+  filtroTransacoes.value = "todos";
+  buscaTransacaoId.value = "";
+  limparMensagem(mensagemExtrato);
+
+  renderizarTransacoes(cliente.conta.transacoes);
+}
+
 /* ==========================================================
-   ELEMENTOS DO DEPÓSITO
+   DADOS INICIAIS DO PAINEL
    ========================================================== */
 
-const formDeposito = document.getElementById("form-deposito");
+nomeClienteCabecalho.textContent = cliente.nome;
+nomeClienteMenu.textContent = cliente.nome;
+nomeClientePerfil.textContent = cliente.nome;
+tipoContaPerfil.textContent = cliente.conta.tipo;
 
-const valorDepositado = document.getElementById("valor-deposito");
+contaAgencia.textContent = cliente.conta.agencia;
+contaNumero.textContent = cliente.conta.numero;
+contaTipo.textContent = cliente.conta.tipo;
 
-const mensagemDeposito = document.getElementById("mensagem-deposito");
+atualizarSaldoNaTela();
+atualizarResumo();
+renderizarTransacoes(cliente.conta.transacoes);
+
+/* ==========================================================
+   MOSTRAR E ESCONDER SALDO
+   ========================================================== */
+
+botaoMostrarSaldo.addEventListener("click", function () {
+  saldoVisivel = !saldoVisivel;
+  atualizarSaldoNaTela();
+});
 
 /* ==========================================================
    REALIZAR DEPÓSITO
@@ -246,105 +280,53 @@ const mensagemDeposito = document.getElementById("mensagem-deposito");
 formDeposito.addEventListener("submit", function (evento) {
   evento.preventDefault();
 
-  const entradaDeposito = valorDepositado.value;
-
+  const entradaDeposito = valorDepositado.value.trim();
   const depositoFeito = Number(entradaDeposito);
 
-  /* Validar campo vazio */
-
-  if (entradaDeposito.trim() === "") {
-    mensagemDeposito.textContent = "Informe um valor para o depósito.";
+  if (entradaDeposito === "") {
+    mostrarMensagem(
+      mensagemDeposito,
+      "Informe um valor para o depósito.",
+      "erro",
+    );
 
     return;
   }
-
-  /* Validar valor não numérico */
 
   if (!Number.isFinite(depositoFeito)) {
-    mensagemDeposito.textContent = "Digite um valor válido.";
+    mostrarMensagem(mensagemDeposito, "Digite um valor válido.", "erro");
 
     return;
   }
-
-  /* Bloquear zero e valores negativos */
 
   if (depositoFeito <= 0) {
-    mensagemDeposito.textContent = "O depósito deve ser maior que zero.";
+    mostrarMensagem(
+      mensagemDeposito,
+      "O depósito deve ser maior que zero.",
+      "erro",
+    );
 
     return;
   }
-
-  /* Atualizar o saldo */
 
   cliente.conta.saldo = depositar(cliente.conta.saldo, depositoFeito);
 
-  /* Criar a transação */
+  registrarTransacao("deposito", depositoFeito);
 
-  const novaTransacao = {
-    id: proximoId,
-    tipo: "deposito",
-    valor: depositoFeito,
-    momento: new Date(),
-  };
+  atualizarSaldoNaTela();
+  atualizarResumo();
+  restaurarExtratoCompleto();
 
-  /* Registrar a transação */
+  limparMensagem(mensagemSaque);
 
-  cliente.conta.transacoes.push(novaTransacao);
-
-  proximoId++;
-
-  /* Atualizar o saldo na tela */
-
-  if (saldoVisivel) {
-    saldoValor.textContent = formatarMoeda(cliente.conta.saldo);
-  } else {
-    saldoValor.textContent = "••••••";
-  }
-
-  /* Atualizar quantidade de operações */
-
-  quantidadeOperacoes.textContent = cliente.conta.transacoes.length;
-
-  /* Filtrar os depósitos */
-
-  const depositos = cliente.conta.transacoes.filter(function (transacao) {
-    return transacao.tipo === "deposito";
-  });
-
-  /* Calcular total depositado */
-
-  const totalDepositado = calcularTotalTransacoes(depositos);
-
-  /* Atualizar o resumo */
-
-  totalDepositadoElemento.textContent = formatarMoeda(totalDepositado);
-
-  /* Restaurar o extrato completo */
-
-  filtroTransacoes.value = "todos";
-  buscaTransacaoId.value = "";
-  mensagemExtrato.textContent = "";
-
-  renderizarTransacoes(cliente.conta.transacoes);
-
-  /* Mostrar sucesso */
-
-  mensagemDeposito.textContent = "Depósito realizado com sucesso.";
-
-  /* Limpar o campo */
+  mostrarMensagem(
+    mensagemDeposito,
+    "Depósito realizado com sucesso.",
+    "sucesso",
+  );
 
   valorDepositado.value = "";
 });
-
-/* ==========================================================
-   ELEMENTOS DO SAQUE
-   ========================================================== */
-
-const formSaque = document.getElementById("form-saque");
-
-const valorSaque = document.getElementById("valor-saque");
-
-const mensagemSaque = document.getElementById("mensagem-saque");
 
 /* ==========================================================
    REALIZAR SAQUE
@@ -353,100 +335,48 @@ const mensagemSaque = document.getElementById("mensagem-saque");
 formSaque.addEventListener("submit", function (evento) {
   evento.preventDefault();
 
-  const entradaSaque = valorSaque.value;
-
+  const entradaSaque = valorSaque.value.trim();
   const saqueFeito = Number(entradaSaque);
 
-  /* Validar campo vazio */
-
-  if (entradaSaque.trim() === "") {
-    mensagemSaque.textContent = "Informe um valor para o saque.";
+  if (entradaSaque === "") {
+    mostrarMensagem(mensagemSaque, "Informe um valor para o saque.", "erro");
 
     return;
   }
-
-  /* Validar valor não numérico */
 
   if (!Number.isFinite(saqueFeito)) {
-    mensagemSaque.textContent = "Digite um valor válido.";
+    mostrarMensagem(mensagemSaque, "Digite um valor válido.", "erro");
 
     return;
   }
-
-  /* Bloquear zero e valores negativos */
 
   if (saqueFeito <= 0) {
-    mensagemSaque.textContent = "O saque deve ser maior que zero.";
+    mostrarMensagem(mensagemSaque, "O saque deve ser maior que zero.", "erro");
 
     return;
   }
-
-  /* Verificar saldo suficiente */
 
   if (saqueFeito > cliente.conta.saldo) {
-    mensagemSaque.textContent = "Saldo insuficiente para realizar o saque.";
+    mostrarMensagem(
+      mensagemSaque,
+      "Saldo insuficiente para realizar o saque.",
+      "erro",
+    );
 
     return;
   }
-
-  /* Atualizar o saldo */
 
   cliente.conta.saldo = sacar(cliente.conta.saldo, saqueFeito);
 
-  /* Criar a transação */
+  registrarTransacao("saque", saqueFeito);
 
-  const novaTransacao = {
-    id: proximoId,
-    tipo: "saque",
-    valor: saqueFeito,
-    momento: new Date(),
-  };
+  atualizarSaldoNaTela();
+  atualizarResumo();
+  restaurarExtratoCompleto();
 
-  /* Registrar a transação */
+  limparMensagem(mensagemDeposito);
 
-  cliente.conta.transacoes.push(novaTransacao);
-
-  proximoId++;
-
-  /* Atualizar saldo na tela */
-
-  if (saldoVisivel) {
-    saldoValor.textContent = formatarMoeda(cliente.conta.saldo);
-  } else {
-    saldoValor.textContent = "••••••";
-  }
-
-  /* Atualizar quantidade de operações */
-
-  quantidadeOperacoes.textContent = cliente.conta.transacoes.length;
-
-  /* Filtrar os saques */
-
-  const saques = cliente.conta.transacoes.filter(function (transacao) {
-    return transacao.tipo === "saque";
-  });
-
-  /* Calcular total sacado */
-
-  const totalSacado = calcularTotalTransacoes(saques);
-
-  /* Atualizar o resumo */
-
-  totalSacadoElemento.textContent = formatarMoeda(totalSacado);
-
-  /* Restaurar o extrato completo */
-
-  filtroTransacoes.value = "todos";
-  buscaTransacaoId.value = "";
-  mensagemExtrato.textContent = "";
-
-  renderizarTransacoes(cliente.conta.transacoes);
-
-  /* Mostrar sucesso */
-
-  mensagemSaque.textContent = "Saque realizado com sucesso.";
-
-  /* Limpar o campo */
+  mostrarMensagem(mensagemSaque, "Saque realizado com sucesso.", "sucesso");
 
   valorSaque.value = "";
 });
@@ -458,20 +388,13 @@ formSaque.addEventListener("submit", function (evento) {
 filtroTransacoes.addEventListener("change", function () {
   const filtroSelecionado = filtroTransacoes.value;
 
-  /* Limpar a busca anterior */
-
   buscaTransacaoId.value = "";
-  mensagemExtrato.textContent = "";
-
-  /* Mostrar todas as transações */
+  limparMensagem(mensagemExtrato);
 
   if (filtroSelecionado === "todos") {
     renderizarTransacoes(cliente.conta.transacoes);
-
     return;
   }
-
-  /* Filtrar depósitos ou saques */
 
   const transacoesFiltradas = cliente.conta.transacoes.filter(
     function (transacao) {
@@ -489,43 +412,36 @@ filtroTransacoes.addEventListener("change", function () {
 formBuscaTransacao.addEventListener("submit", function (evento) {
   evento.preventDefault();
 
-  const entradaId = buscaTransacaoId.value;
-
+  const entradaId = buscaTransacaoId.value.trim();
   const idProcurado = Number(entradaId);
 
-  /* Validar campo vazio */
-
-  if (entradaId.trim() === "") {
-    mensagemExtrato.textContent = "Informe o ID da transação.";
+  if (entradaId === "") {
+    mostrarMensagem(mensagemExtrato, "Informe o ID da transação.", "erro");
 
     return;
   }
-
-  /* Validar valor não numérico */
 
   if (!Number.isFinite(idProcurado)) {
-    mensagemExtrato.textContent = "Digite um ID válido.";
+    mostrarMensagem(mensagemExtrato, "Digite um ID válido.", "erro");
 
     return;
   }
-
-  /* Validar número inteiro */
 
   if (!Number.isInteger(idProcurado)) {
-    mensagemExtrato.textContent = "O ID deve ser um número inteiro.";
+    mostrarMensagem(
+      mensagemExtrato,
+      "O ID deve ser um número inteiro.",
+      "erro",
+    );
 
     return;
   }
-
-  /* Bloquear zero e números negativos */
 
   if (idProcurado <= 0) {
-    mensagemExtrato.textContent = "O ID deve ser maior que zero.";
+    mostrarMensagem(mensagemExtrato, "O ID deve ser maior que zero.", "erro");
 
     return;
   }
-
-  /* Procurar a transação */
 
   const transacaoEncontrada = cliente.conta.transacoes.find(
     function (transacao) {
@@ -533,35 +449,26 @@ formBuscaTransacao.addEventListener("submit", function (evento) {
     },
   );
 
-  /* Verificar se a transação existe */
-
   if (transacaoEncontrada === undefined) {
-    mensagemExtrato.textContent = "Nenhuma transação encontrada com esse ID.";
-
     renderizarTransacoes([]);
+
+    mostrarMensagem(
+      mensagemExtrato,
+      "Nenhuma transação encontrada com esse ID.",
+      "erro",
+    );
 
     return;
   }
 
-  /* Mostrar somente a transação encontrada */
-
   filtroTransacoes.value = "todos";
-
   renderizarTransacoes([transacaoEncontrada]);
 
-  mensagemExtrato.textContent = "Transação encontrada com sucesso.";
+  mostrarMensagem(
+    mensagemExtrato,
+    "Transação encontrada com sucesso.",
+    "sucesso",
+  );
 
   buscaTransacaoId.value = "";
 });
-
-/* ==========================================================
-   ESTADO INICIAL DO PAINEL
-   ========================================================== */
-
-quantidadeOperacoes.textContent = cliente.conta.transacoes.length;
-
-totalDepositadoElemento.textContent = formatarMoeda(0);
-
-totalSacadoElemento.textContent = formatarMoeda(0);
-
-renderizarTransacoes(cliente.conta.transacoes);
