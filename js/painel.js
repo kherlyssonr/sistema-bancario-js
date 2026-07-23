@@ -762,7 +762,6 @@ formSaque.addEventListener("submit", function (evento) {
   });
 
   const totalSacado = calcularTotalTransacoes(saques);
-  const totalSacadoElemento = document.getElementById("total-sacado");
   totalSacadoElemento.textContent = formatarMoeda(totalSacado);
 
   // Mostrar mensagem de sucesso
