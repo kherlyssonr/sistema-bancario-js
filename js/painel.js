@@ -908,5 +908,29 @@ formBuscaTransacao.addEventListener("submit", function (evento) {
     return;
   }
 
-  console.log("ID válido:", idProcurado);
+  /* Procurar a transação pelo ID */
+
+  const transacaoEncontrada = cliente.conta.transacoes.find(
+    function (transacao) {
+      return transacao.id === idProcurado;
+    },
+  );
+
+  /* Verificar se a transação existe */
+
+  if (transacaoEncontrada === undefined) {
+    mensagemExtrato.textContent = "Nenhuma transação encontrada com esse ID.";
+
+    renderizarTransacoes([]);
+
+    return;
+  }
+
+  /* Mostrar somente a transação encontrada */
+
+  renderizarTransacoes([transacaoEncontrada]);
+
+  mensagemExtrato.textContent = "Transação encontrada com sucesso.";
+
+  buscaTransacaoId.value = "";
 });
